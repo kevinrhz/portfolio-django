@@ -1,4 +1,15 @@
-# Django
+# Python
 __pycache__/
+*.py[cod]
+*.sqlite3
+
+# Django
 db.sqlite3
+.env
+
+# Virtualenv
 venv/
+
+# VSCode or IDE junk
+.vscode/
+*.log
