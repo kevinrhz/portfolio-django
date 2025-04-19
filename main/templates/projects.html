@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Projects{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/projects.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/projects.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<main class="projects-page">
+    <h1 class="section-title">Projects</h1>
+
+    <!-- Grid Layout for Projects -->
+    <section class="projects-grid">
+        <!-- CineSteam Project Card -->
+        <div class="project-card">
+            <img src="{% static 'images/CineSteamLogo.webp' %}" alt="CineSteamLogo">
+            <div class="project-details">
+                <h2>CineSteam</h2>
+                <p>A PostgreSQL relational database integrating IMDB's top 1000 Movies and Steam's 2025 game dataset for data analysis, SQL queries, and ETL with Python.</p>
+                <ul class="tech-stack">
+                    <li>Python</li>
+                    <li>PostgreSQL</li>
+                    <li>pandas</li>
+                    <li>psycopg2</li>
+                    <li>ETL</li>
+                </ul>
+                <div class="project-links">
+                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/kevinrhz/CineSteam" class="btn">GitHub</a>
+                    <a href="{% url 'cinesteam_demo' %}" class="btn">Demo</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Custom Gaming PC Project Card -->
+        <div class="project-card">
+            <img src="{% static 'images/close up.jpeg' %}" alt="Custom PC Build">
+            <div class="project-details">
+                <h2>Custom PC Build</h2>
+                <p>An advanced liquid-cooled custom-built PC for peak gaming and productivity.</p>
+                <ul class="tech-stack">
+                    <li>Custom Cooling Loop</li>
+                    <li>Hardware Tuning</li>
+                    <li>Troubleshooting</li>
+                </ul>
+                <div class="project-links">
+                    <a href="#" class="btn open-viewer" data-project="customPC">Images</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- PyFileManager Project Card -->
+        <div class="project-card">
+            <img src="{% static 'images/PyFileManagerLogo.webp' %}" alt="PyFileManager">
+            <div class="project-details">
+                <h2>PyFileManager</h2>
+                <p>A file management system with GUI. Features file browsing, search, deletion and creation.</p>
+                <ul class="tech-stack">
+                    <li>Python</li>
+                    <li>PyQt6</li>
+                    <li>pathlib</li>
+                    <li>os</li>
+                </ul>
+                <div class="project-links">
+                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/kevinrhz/PyFileManager" class="btn">GitHub</a>
+                    <a href="#" class="btn">Live Demo</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills & Technologies Section -->
+    <section class="skills-grid">
+        <h2>Skills & Technologies</h2>
+        <div class="skills-container">
+            <div class="skill-card">
+                <img src="{% static 'icons/python-black.svg' %}" alt="Python Icon">
+                <span>Python</span>
+            </div>
+            <div class="skill-card">
+                <img src="{% static 'icons/flask-icon.svg' %}" alt="Flask Icon">
+                <span>Flask</span>
+            </div>
+            <div class="skill-card">
+                <img src="{% static 'icons/sql-icon.svg' %}" alt="SQL Icon">
+                <span>SQL</span>
+            </div>
+            <div class="skill-card">
+                <img src="{% static 'icons/ml-icon.svg' %}" alt="Machine Learning Icon">
+                <span>Machine Learning</span>
+            </div>
+            <div class="skill-card">
+                <img src="{% static 'icons/css-icon.svg' %}" alt="CSS Icon">
+                <span>CSS</span>
+            </div>
+            <div class="skill-card">
+                <img src="{% static 'icons/html-icon.svg' %}" alt="HTML Icon">
+                <span>HTML</span>
+            </div>
+            <div class="skill-card">
+                <img src="{% static 'icons/js-icon.svg' %}" alt="JavaScript Icon">
+                <span>JavaScript</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Viewer -->
+    <div id="mediaViewer" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <div class="media-container">
+                <button id="prevBtn" class="nav-btn">&#10094;</button>
+                <div id="mediaWrapper">
+                    <img id="viewerImage" class="viewer-media" src="" alt="Media">
+                    <video id="viewerVideo" class="viewer-media" controls></video>
+                </div>
+                <button id="nextBtn" class="nav-btn">&#10095;</button>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock %}

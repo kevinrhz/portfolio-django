@@ -1,0 +1,187 @@
+/* General Layout */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Kode Mono', monospace;
+    margin: 0;
+}
+
+/* Contact Page Layout */
+.contact-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    text-align: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Contact Page Title */
+.contact-page h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+/* Contact Page Description */
+.contact-page p {
+    font-size: 1.2rem;
+    color: var(--neutral-light);
+    margin-bottom: 20px;
+}
+
+/* Email Link */
+.contact-page p a {
+    color: var(--accent-primary);
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.contact-page p a:hover {
+    color: var(--accent-secondary);
+}
+
+/* Form Styling */
+form {
+    background-color: hsla(0, 0%, 100%, 0.1); /* Semi-transparent white */
+    backdrop-filter: blur(10px); /* Frosted glass effect */
+    border-radius: 10px;
+    box-shadow: 0 4px 10px hsla(0, 0%, 0%, 0.2);
+    padding: 30px;
+    max-width: 500px;
+    width: 100%;
+    text-align: center;
+    animation: fadeInUp 1s ease-out forwards;
+}
+
+/* Input Fields */
+.form-control {
+    width: 100%;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid hsla(0, 0%, 80%, 0.5);
+    background: hsla(0, 0%, 100%, 0.05); /* Transparent input */
+    color: var(--text-color);
+    font-family: 'Kode Mono', monospace;
+}
+
+/* Textarea Field */
+.form-control#message {
+    height: 200px;
+    resize: none;
+    margin-bottom: 20px;
+    padding: 10px;
+}
+
+/* Submit Button */
+.form-button {
+    background: linear-gradient(90deg, hsl(20, 100%, 50%), hsl(0, 100%, 50%));
+    color: var(--text-color);
+    padding: 15px 30px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    box-shadow: 0 4px 10px hsla(0, 0%, 0%, 0.2);
+    transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-button:hover {
+    background: linear-gradient(135deg, hsl(0, 100%, 50%), hsl(20, 100%, 50%));
+    transform: scale(1.05);
+    box-shadow: 0 6px 15px hsla(0, 0%, 0%, 0.3);
+}
+
+/* Flash Messages */
+.flash-messages {
+    margin: 20px auto;
+    max-width: 400px;
+    text-align: center;
+}
+
+.alert {
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    font-family: 'Kode Mono', monospace;
+}
+
+.alert-success {
+    background-color: hsl(120, 40%, 90%);
+    color: hsl(120, 40%, 20%);
+    border: 1px solid hsl(120, 40%, 70%);
+}
+
+.alert-error {
+    background-color: hsl(0, 40%, 90%);
+    color: hsl(0, 40%, 30%);
+    border: 1px solid hsl(0, 40%, 70%);
+}
+
+/* Fade In Animation */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+    .contact-page h1 {
+        font-size: 2.5rem;
+    }
+
+    .contact-page p {
+        font-size: 1rem;
+    }
+
+    form {
+        padding: 20px;
+    }
+
+    .form-control {
+        font-size: 0.9rem;
+        padding: 8px;
+    }
+
+    .form-button {
+        font-size: 1rem;
+        padding: 12px 25px;
+    }
+}
+
+/* Smaller Devices */
+@media (max-width: 480px) {
+    .contact-page h1 {
+        font-size: 2rem;
+    }
+
+    .contact-page p {
+        font-size: 0.9rem;
+    }
+
+    .form-control {
+        font-size: 0.8rem;
+        padding: 6px;
+    }
+
+    .form-button {
+        font-size: 0.9rem;
+        padding: 10px 20px;
+    }
+
+    form {
+        padding: 15px;
+    }
+}

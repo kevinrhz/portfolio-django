@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}PC Build Gallery{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="gallery-page">
+  <h1>My Custom PC Build</h1>
+  <div class="gallery-container">
+    {% for item in items %}
+      {% if item.media_type == 'image' %}
+        <img src="{% static 'images/pc_build/'|add:item.filename %}" alt="{{ item.caption|default:'Gallery Image' }}" class="gallery-image">
+      {% elif item.media_type == 'video' %}
+        <video autoplay loop muted playsinline class="gallery-video">
+          <source src="{% static 'videos/pc_build/'|add:item.filename %}" type="video/mp4">
+        </video>
+      {% endif %}
+    {% endfor %}
+  </div>
+</main>
+{% endblock %}

@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}KevPapi{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400..700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <div class="container">
+        <div class="saturn">
+            <img src="{% static 'images/saturn.webp' %}" alt="Saturn">
+        </div>
+
+        <div class="plaque">
+            <h1 class="name">Kevin Rahsaz</h1>
+            <h2 class="job title">Software Engineer & Data Scientist</h2>
+
+            <div class="button-group">
+                <a href="{% url 'projects' %}" class="projects-button">My Projects</a>
+                <a href="{% url 'contact' %}" class="contact-button">Get in Touch</a>
+            </div>
+        </div>
+
+        <div class="social-icons">
+            <a href="https://github.com/kevinrhz" target="_blank">
+                <img src="{% static 'icons/github-icon.svg' %}" alt="GitHub Icon">
+            </a>
+            <a href="https://instagram.com/kevmo.bc" target="_blank">
+                <img src="{% static 'icons/instagram-icon.svg' %}" alt="Instagram Icon">
+            </a>
+            <a href="https://linkedin.com/in/kevin-rahsaz-832a7420a/" target="_blank">
+                <img src="{% static 'icons/linkedin-icon.svg' %}" alt="LinkedIn Icon">
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- About Me Button -->
+<div class="about-me-button" id="about-me-btn">
+    <span>About Me</span>
+    <img src="{% static 'icons/double-arrow-down.svg' %}" alt="Double Arrow Icon">
+</div>
+
+<!-- About Me Section -->
+<section id="about-me-section" class="about-me-section">
+    <h2>About Me</h2>
+    <div class="about-me-container">
+        <!-- Part 1: Professional Summary -->
+        <div class="about-me-summary">
+            <p>
+                I am a dedicated <strong>Software Engineer & Data Scientist</strong> with a background in building efficient, scalable applications. With experience in backend development and data-driven projects, I develop robust solutions to complex technical problems.
+            </p>
+        </div>
+
+        <!-- Part 2: Key Achievements -->
+        <div class="about-me-achievements">
+            <h3>Key Achievements</h3>
+            <ul>
+                <li>Built a file management system with PyQt, implementing an intuitive UI and search functionality.</li>
+                <li>Gained experience in SQL and database design, applying structured queries to real-world projects.</li>
+            </ul>
+        </div>
+
+        <!-- Part 3: Skills Highlight -->
+        <div class="about-me-skills">
+            <h3>Core Skills</h3>
+            <div class="skills-grid">
+                <span>Python</span>
+                <span>Flask</span>
+                <span>Data Structures & Algorithms</span>
+                <span>SQL</span>
+                <span>Data Visualization</span>
+            </div>
+        </div>
+
+        <!-- Part 4: Call to Action -->
+        <div class="about-me-cta">
+            <a href="{% static 'Kevin Rahsaz Resume update 2025.pdf' %}" target="_blank" class="cta-button">Download My Resume</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const aboutMeButton = document.getElementById('about-me-btn');
+        const aboutMeSection = document.getElementById('about-me-section');
+
+        aboutMeButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            if (aboutMeSection) {
+                aboutMeSection.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+</script>
+{% endblock %}

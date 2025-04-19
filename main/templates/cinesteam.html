@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}CineSteam Demo{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/cinesteam.css' %}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/cinesteam.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<main>
+    <section class="search-section">
+        <h1>CineSteam</h1>
+        <h2>Find Movie Recommendations</h2>
+        <form id="search-form">
+            <input type="text" id="game-input" placeholder="Enter a Steam game..." required>
+            <button type="submit">Search</button>
+        </form>
+    </section>
+
+    <section class="recommendations">
+        <h2>Personalized Recommendations</h2>
+        <div class="movie-grid">
+            {% comment %} Static example movies {% endcomment %}
+            <div class="movie-card"><img src="..." alt="Movie"><h3>Title</h3></div>
+            <!-- Repeat -->
+        </div>
+    </section>
+
+    <section class="design-schema">
+        <h2 class="schema-title">Design Schema</h2>
+        <p class="schema-description">This section provides an overview of the CineSteam system architecture. Below is a diagram illustrating key design components.</p>
+        <img src="{% static 'images/cinesteam_schema.svg' %}" alt="CineSteam Design Schema" class="schema-image">
+    </section>
+</main>
+{% endblock %}

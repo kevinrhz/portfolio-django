@@ -1,0 +1,171 @@
+/* General Styling */
+body {
+    font-family: 'Kode Mono', monospace;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+/* Search Section */
+.search-section {
+    margin: 40px auto;
+    padding: 20px;
+}
+
+.search-section h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.search-section h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+#search-form {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#game-input {
+    flex: 1;
+    padding: 15px;
+    font-size: 1.2rem;
+    border-radius: 5px;
+    border: none;
+}
+
+button {
+    padding: 15px 20px;
+    font-size: 1.2rem;
+    background-color: #ff4500;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #d32f2f;
+}
+
+/* Recommendations Grid */
+.recommendations {
+    margin-top: 50px;
+    padding: 20px;
+}
+
+.recommendations h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+/* Grid Layout */
+.movie-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px;
+}
+
+/* Movie Cards */
+.movie-card {
+    background-color: #1E1E1E;
+    padding: 10px;
+    border-radius: 10px;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.movie-card img {
+    width: 100%;
+    border-radius: 5px;
+}
+
+.movie-card h3 {
+    font-size: 1rem;
+    margin-top: 8px;
+    color: #ffffff;
+}
+
+.movie-card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 10px rgba(255, 69, 0, 0.5);
+}
+
+/* Design Schema Section */
+.design-schema {
+    text-align: center;
+    margin-top: 50px;
+    padding: 50px 20px;
+}
+
+.schema-title {
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+.schema-description {
+    font-size: 1.2rem;
+    color: #B0B0B0;
+    margin-bottom: 30px;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* SVG Image */
+.schema-image {
+    width: 90%;
+    max-width: 1200px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #search-form {
+        flex-direction: column;
+    }
+
+    #game-input, button {
+        width: 100%;
+    }
+
+    .movie-grid {
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 10px;
+    }
+
+    .movie-card {
+        padding: 8px;
+    }
+
+    .movie-card h3 {
+        font-size: 0.9rem;
+    }
+
+    .schema-title {
+        font-size: 2.5rem;
+    }
+
+    .schema-description {
+        font-size: 1rem;
+    }
+
+    .schema-image {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        padding: 10px;
+    }
+
+}

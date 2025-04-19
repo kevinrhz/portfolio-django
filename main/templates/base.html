@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portfolio{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    {% block extra_css %}{% endblock %}
+</head>
+<body class="{% if request.path == '/' %}home{% endif %}">
+    <nav class="navbar">
+        <div class="container">
+            <ul>
+                <li><a href="{% url 'home' %}" class="{% if request.path == '/' %}active{% endif %}">Home</a></li>
+                <li><a href="{% url 'projects' %}" class="{% if request.path == '/projects/' %}active{% endif %}">Projects</a></li>
+                <li><a href="{% url 'contact' %}" class="{% if request.path == '/contact/' %}active{% endif %}">Contact</a></li>
+            </ul>
+
+            <!-- Social Media Links Section -->
+            <div class="navbar-social">
+                <a href="https://github.com/kevinrhz" target="_blank">
+                    <img src="{% static 'icons/github-icon.svg' %}" alt="GitHub Icon">
+                </a>
+                <a href="https://instagram.com/kevmo.bc" target="_blank">
+                    <img src="{% static 'icons/instagram-icon.svg' %}" alt="Instagram Icon">
+                </a>
+                <a href="https://linkedin.com/in/kevin-rahsaz-832a7420a/" target="_blank">
+                    <img src="{% static 'icons/linkedin-icon.svg' %}" alt="LinkedIn Icon">
+                </a>
+            </div>
+
+            <div class="menu-toggle" id="mobile-menu">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </nav>
+
+    <canvas id="star-canvas"></canvas> <!-- Starry Background -->
+
+    <div id="content">
+        {% block content %}{% endblock %}
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Kevin Rahsaz. All rights reserved.</p>
+    </footer>
+
+    <script src="{% static 'js/stars.js' %}"></script>
+
+    <script>
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navLinks = document.querySelector('.navbar ul');
+
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.body.classList.contains('home')) {
+                const navbar = document.querySelector('.navbar');
+
+                document.addEventListener('mousemove', (event) => {
+                    if (event.clientY <= 50) {
+                        navbar.classList.add('visible');
+                    } else {
+                        navbar.classList.remove('visible');
+                    }
+                });
+            }
+        });
+    </script>
+
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
