@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from .forms import ContactForm
+from .models import ContactMessage
 
 def home(request):
     return render(request, 'home.html')
@@ -14,12 +15,11 @@ def contact(request):
     if request.method == 'POST':
         form = ContactForm(request.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
+            # Save to database
+            contact_message = form.save()
 
-            full_message = f"From: {name} <{email}>\n\n{message}"
-
+            # Send email
+            full_message = f"From: {contact_message.name} <{contact_message.email}>\n\n{contact_message.message}"
             send_mail(
                 subject="Portfolio Contact Form",
                 message=full_message,
@@ -36,6 +36,7 @@ def contact(request):
         form = ContactForm()
 
     return render(request, 'contact.html', {'form': form})
+
   
 def cinesteam_demo(request):
     return render(request, 'cinesteam.html')
