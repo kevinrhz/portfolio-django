@@ -50,18 +50,22 @@ form {
     backdrop-filter: blur(10px); /* Frosted glass effect */
     border-radius: 10px;
     box-shadow: 0 4px 10px hsla(0, 0%, 0%, 0.2);
-    padding: 30px;
+    padding: 20px 100px;
     max-width: 500px;
     width: 100%;
     text-align: center;
     animation: fadeInUp 1s ease-out forwards;
+    box-sizing: border-box;
 }
 
 /* Input Fields */
 .form-control {
     width: 100%;
+    max-width: 340px;
+    margin-left: auto;
+    margin-right: auto;
     margin-bottom: 15px;
-    padding: 10px;
+    padding: 12px 15px;
     border-radius: 5px;
     border: 1px solid hsla(0, 0%, 80%, 0.5);
     background: hsla(0, 0%, 100%, 0.05); /* Transparent input */
@@ -100,16 +104,27 @@ form {
 
 /* Flash Messages */
 .flash-messages {
-    margin: 20px auto;
+    position: fixed;
+    top: 70px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
     max-width: 400px;
+    width: 90%;
     text-align: center;
+    pointer-events: none;
+    opacity: 0;
+    animation: fadeInCenter 0.5s ease-out forwards;
 }
+
 
 .alert {
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
     font-family: 'Kode Mono', monospace;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    pointer-events: auto;
 }
 
 .alert-success {
@@ -124,17 +139,29 @@ form {
     border: 1px solid hsl(0, 40%, 70%);
 }
 
-/* Fade In Animation */
-@keyframes fadeInUp {
-    0% {
+.flash-messages.fade-out {
+    animation: fadeOutUp 0.5s ease-in forwards;
+}
+
+@keyframes fadeInCenter {
+    from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translate(-50%, 20px);
     }
-    100% {
+    to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate(-50%, 0);
     }
 }
+
+
+@keyframes fadeOutUp {
+    to {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+}
+
 
 /* Mobile Styles */
 @media (max-width: 768px) {
