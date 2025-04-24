@@ -11,7 +11,8 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 SECRET_KEY = env("SECRET_KEY")
 
 DEBUG = True
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['kevinrahsaz.com', 'www.kevinrahsaz.com']
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
