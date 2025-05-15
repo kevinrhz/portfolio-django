@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Skills{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/skills.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="skills-page">
+    <h1>Skills & Technologies</h1>
+    <p class="subtitle">Organized by domain and proficiency level</p>
+
+    <section class="skill-section">
+        <h2>Software Engineering</h2>
+        <div class="skills-grid">
+            <div class="skill-card" data-level="Advanced">
+                <img src="{% static 'icons/python-black.svg' %}" alt="Python">
+                <span>Python</span>
+            </div>
+            <div class="skill-card" data-level="Intermediate">
+                <img src="{% static 'icons/python-black.svg' %}" alt="Flask">
+                <span>Flask</span>
+            </div>
+            <div class="skill-card" data-level="Intermediate">
+                <img src="{% static 'icons/python-black.svg' %}" alt="JavaScript">
+                <span>JavaScript</span>
+            </div>
+        </div>
+    </section>
+
+    <section class="skill-section">
+        <h2>Machine Learning & Data Science</h2>
+        <div class="skills-grid">
+            <div class="skill-card" data-level="Advanced">
+                <img src="{% static 'icons/python-black.svg' %}" alt="ML">
+                <span>Machine Learning</span>
+            </div>
+            <div class="skill-card" data-level="Intermediate">
+                <img src="{% static 'icons/python-black.svg' %}" alt="SQL">
+                <span>SQL</span>
+            </div>
+            <div class="skill-card" data-level="Intermediate">
+                <img src="{% static 'icons/python-black.svg' %}" alt="DataViz">
+                <span>Data Visualization</span>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+</script>
+{% endblock %}

@@ -364,41 +364,4 @@ body {
         top: -20%;
         left: -10%;
     }
-
-    .about-me-button {
-        font-size: 2rem;
-        margin-top: -12vh;
-    }
-
-    .about-me-button img {
-        width: 25px;
-        height: 25px;
-    }
-
-    .about-me-section h2 {
-        font-size: 2rem;
-    }
-
-    .about-me-summary p {
-        font-size: 1rem;
-    }
-
-    .about-me-achievements h3,
-    .about-me-skills h3 {
-        font-size: 1.2rem;
-    }
-
-    .skills-grid {
-        grid-template-columns: repeat(2, 1fr); /* 2 columns on smaller screens */
-    }
-
-    .skills-grid span {
-        font-size: 0.9rem;
-        height: 80px;
-    }
-
-    .cta-button {
-        font-size: 0.9rem;
-        padding: 8px 15px;
-    }
 }
