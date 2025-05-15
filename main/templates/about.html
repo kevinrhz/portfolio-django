@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}About Me{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="about-page">
+    <section class="about-intro">
+        <h1>About Me</h1>
+        <p class="intro-summary">
+        I am a highly motivated Software Engineer and Data Scientist with a passion for building innovative solutions and extracting actionable insights from data. With [Number] years of experience, I specialize in developing scalable web applications using Python and Django, and applying machine learning techniques to solve complex business problems. My goal is to leverage my skills to contribute to a dynamic team and create impactful technology.
+        </p>
+    </section>
+
+    <section class="about-background">
+        <h2>Background</h2>
+        <p>
+            I hold a [Your Degree] in [Your Major] from [Your University]. During my studies, I focused on [Relevant Coursework]. My professional journey began at [First Company], where I [Your Role] and gained experience in [Relevant Technologies/Skills]. I then moved to [Second Company] to further develop my expertise in [Specific Area].
+        </p>
+        <div class="achievements">
+            <h3>Key Achievements</h3>
+            <ul>
+                <li>
+                    Developed a Django-based e-commerce platform that increased online sales by 20% in the first quarter.
+                </li>
+                <li>
+                    Built a machine learning model to predict customer churn with 90% accuracy, resulting in a 15% reduction in customer attrition.
+                </li>
+                <li>
+                    Led a team of 3 engineers in the successful deployment of a RESTful API for a high-traffic application.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="about-skills-summary">
+        <h2>Skills Summary</h2>
+        <p>
+            My core competencies include Python, Django, JavaScript, SQL, Machine Learning, and Data Visualization. I am proficient in the full software development lifecycle and experienced in applying data science methodologies to drive business decisions.
+        </p>
+        <a href="{% url 'skills' %}" class="view-all-skills">View All Skills</a>
+    </section>
+
+    <section class="about-projects-highlight">
+        <h2>Projects Highlight</h2>
+        <div class="highlight-grid">
+            <div class="highlight-card">
+                <h3>CineSteam</h3>
+                <p>
+                    A PostgreSQL database project integrating movie and game datasets to analyze trends. Key technologies: Python, PostgreSQL, pandas. <a href="{% url 'projects' %}">Learn More</a>
+                </p>
+            </div>
+            <div class="highlight-card">
+                <h3>PyFileManager</h3>
+                <p>
+                    A GUI-based file management system for efficient file operations. Key technologies: Python, PyQt6. <a href="{% url 'projects' %}">Learn More</a>
+                </p>
+            </div>
+        </div>
+        <a href="{% url 'projects' %}" class="view-all-projects">View All Projects</a>
+    </section>
+
+    <section class="about-personal-interests">
+        <h2>Personal Interests</h2>
+        <p>
+            Outside of work, I enjoy staying up-to-date with the latest advancements in technology, playing guitar, and hiking in the beautiful Pacific Northwest.
+        </p>
+    </section>
+
+    <section class="about-cta">
+        <h2>Let's Connect!</h2>
+        <p>
+            I am actively seeking new opportunities to apply my skills and contribute to challenging projects. Please feel free to reach out to discuss potential collaborations or opportunities.
+        </p>
+        <div class="cta-buttons">
+            <a href="{% url 'contact' %}" class="cta-button">Contact Me</a>
+            <a href="{% static 'Kevin Rahsaz Resume update 2025.pdf' %}" class="cta-button" target="_blank">View Resume</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
