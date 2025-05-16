@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 
-{% block title %}Skills{% endblock %}
+{% block title %}My Skills{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/skills.css' %}">
@@ -9,48 +9,249 @@
 
 {% block content %}
 <main class="skills-page">
-    <h1>Skills & Technologies</h1>
-    <p class="subtitle">Organized by domain and proficiency level</p>
-
-    <section class="skill-section">
-        <h2>Software Engineering</h2>
-        <div class="skills-grid">
-            <div class="skill-card" data-level="Advanced">
-                <img src="{% static 'icons/python-black.svg' %}" alt="Python">
-                <span>Python</span>
-            </div>
-            <div class="skill-card" data-level="Intermediate">
-                <img src="{% static 'icons/python-black.svg' %}" alt="Flask">
-                <span>Flask</span>
-            </div>
-            <div class="skill-card" data-level="Intermediate">
-                <img src="{% static 'icons/python-black.svg' %}" alt="JavaScript">
-                <span>JavaScript</span>
-            </div>
+    <header class="skills-header">
+        <h1>Skills & Expertise</h1>
+        <p class="subtitle">Explore my skills tailored to your interest, or view all.</p>
+        <div class="skills-view-selector">
+            <button class="view-toggle-btn active" data-view="swe">Software Engineering</button>
+            <button class="view-toggle-btn" data-view="dsml">Data Science & ML</button>
+            <button class="view-toggle-btn" data-view="all">View All Skills</button>
         </div>
-    </section>
+    </header>
 
-    <section class="skill-section">
-        <h2>Machine Learning & Data Science</h2>
-        <div class="skills-grid">
-            <div class="skill-card" data-level="Advanced">
-                <img src="{% static 'icons/python-black.svg' %}" alt="ML">
-                <span>Machine Learning</span>
-            </div>
-            <div class="skill-card" data-level="Intermediate">
-                <img src="{% static 'icons/python-black.svg' %}" alt="SQL">
-                <span>SQL</span>
-            </div>
-            <div class="skill-card" data-level="Intermediate">
-                <img src="{% static 'icons/python-black.svg' %}" alt="DataViz">
-                <span>Data Visualization</span>
-            </div>
+    <div class="skills-content-container">
+
+        <div class="skill-view-section" id="swe-skills-view">
+            <section class="skills-category">
+                <h2>Languages (SWE)</h2>
+                <div class="skills-grid">
+                    <div class="skill-card language-card">
+                        <div class="skill-card-header">
+                            <img src="{% static 'icons/python-icon.svg' %}" alt="Python" class="skill-icon">
+                            <span class="skill-name">Python</span>
+                        </div>
+                        <ul class="frameworks-list">
+                            <li>Django</li>
+                            <li>Flask</li>
+                            <li>PyQt6</li>
+                        </ul>
+                        <span class="proficiency-tag swe-lang">Advanced</span>
+                    </div>
+                    <div class="skill-card language-card">
+                        <div class="skill-card-header">
+                            <img src="{% static 'icons/cplusplus-icon.svg' %}" alt="C++" class="skill-icon"> {# Placeholder #}
+                            <span class="skill-name">C++</span>
+                        </div>
+                         <ul class="frameworks-list">
+                            <li>cuFFT (CUDA)</li>
+                        </ul>
+                        <span class="proficiency-tag swe-lang">Intermediate</span>
+                    </div>
+                    <div class="skill-card language-card">
+                        <div class="skill-card-header">
+                            <img src="{% static 'icons/java-icon.svg' %}" alt="Java" class="skill-icon"> {# Placeholder #}
+                            <span class="skill-name">Java</span>
+                        </div>
+                        <span class="proficiency-tag swe-lang">Basic</span>
+                    </div>
+                    <div class="skill-card language-card">
+                        <div class="skill-card-header">
+                            <img src="{% static 'icons/js-icon.svg' %}" alt="JavaScript" class="skill-icon">
+                            <span class="skill-name">JavaScript</span>
+                        </div>
+                        <span class="proficiency-tag swe-lang">Basic</span>
+                    </div>
+                    <div class="skill-card language-card">
+                        <div class="skill-card-header">
+                            <img src="{% static 'icons/html-icon.svg' %}" alt="HTML" class="skill-icon">
+                            <span class="skill-name">HTML</span>
+                        </div>
+                        <span class="proficiency-tag swe-lang">Intermediate</span>
+                    </div>
+                    <div class="skill-card language-card">
+                        <div class="skill-card-header">
+                            <img src="{% static 'icons/css-icon.svg' %}" alt="CSS" class="skill-icon">
+                            <span class="skill-name">CSS</span>
+                        </div>
+                        <span class="proficiency-tag swe-lang">Intermediate</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="skills-category">
+                <h2>Frameworks & Libraries (SWE)</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <img src="{% static 'icons/django-icon.svg' %}" alt="Django" class="skill-icon"> {# Placeholder #}
+                        <span class="skill-name">Django</span>
+                        <span class="proficiency-tag framework">Intermediate</span>
+                    </div>
+                    <div class="skill-card">
+                        <img src="{% static 'icons/flask-icon.svg' %}" alt="Flask" class="skill-icon">
+                        <span class="skill-name">Flask</span>
+                        <span class="proficiency-tag framework">Intermediate</span>
+                    </div>
+                    <div class="skill-card">
+                        <img src="{% static 'icons/pyqt6-icon.svg' %}" alt="PyQt6" class="skill-icon"> {# Placeholder #}
+                        <span class="skill-name">PyQt6 (GUI)</span>
+                        <span class="proficiency-tag library">Intermediate</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="skills-category">
+                <h2>DevOps & Servers (SWE)</h2>
+                <div class="skills-grid">
+                    <div class="skill-card"><img src="{% static 'icons/linux_icon.svg' %}" alt="Linux" class="skill-icon"> <span class="skill-name">Linux Ubuntu Server</span><span class="proficiency-tag devops">Intermediate</span></div>
+                    <div class="skill-card"><img src="{% static 'icons/nginx_icon.svg' %}" alt="Nginx" class="skill-icon"> <span class="skill-name">Nginx</span><span class="proficiency-tag devops">Intermediate</span></div>
+                    <div class="skill-card"><img src="{% static 'icons/gunicorn_icon.svg' %}" alt="Gunicorn" class="skill-icon"> <span class="skill-name">Gunicorn</span><span class="proficiency-tag devops">Intermediate</span></div>
+                    <div class="skill-card"><img src="{% static 'icons/cloudflare_icon.svg' %}" alt="Cloudflare" class="skill-icon"> <span class="skill-name">Cloudflare</span><span class="proficiency-tag devops">Intermediate</span></div>
+                </div>
+            </section>
         </div>
-    </section>
+
+        <div class="skill-view-section" id="dsml-skills-view" hidden>
+            <section class="skills-category">
+                <h2>Languages (DS/ML)</h2>
+                <div class="skills-grid">
+                    <div class="skill-card language-card">
+                        <div class="skill-card-header">
+                            <img src="{% static 'icons/python-icon.svg' %}" alt="Python" class="skill-icon">
+                            <span class="skill-name">Python</span>
+                        </div>
+                        <span class="proficiency-tag dsml-lang">Advanced</span>
+                    </div>
+                     <div class="skill-card language-card">
+                        <div class="skill-card-header">
+                            <img src="{% static 'icons/sql-icon.svg' %}" alt="SQL" class="skill-icon">
+                            <span class="skill-name">SQL</span>
+                        </div>
+                        <span class="proficiency-tag dsml-lang">Intermediate</span>
+                    </div>
+                    <div class="skill-card language-card">
+                        <div class="skill-card-header">
+                             <img src="{% static 'icons/cplusplus-icon.svg' %}" alt="C++" class="skill-icon"> {# Placeholder #}
+                            <span class="skill-name">C++ (for performance)</span>
+                        </div>
+                        <span class="proficiency-tag dsml-lang">Intermediate</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="skills-category">
+                <h2>Libraries & Toolkits (DS/ML)</h2>
+                <div class="skills-grid">
+                    <div class="skill-card"><img src="{% static 'icons/pandas-icon.svg' %}" alt="Pandas" class="skill-icon"> <span class="skill-name">Pandas</span><span class="proficiency-tag library">Advanced</span></div>
+                    <div class="skill-card"><img src="{% static 'icons/numpy-icon.svg' %}" alt="NumPy" class="skill-icon"> <span class="skill-name">NumPy</span><span class="proficiency-tag library">Advanced</span></div>
+                    <div class="skill-card"><img src="{% static 'icons/scipy-icon.svg' %}" alt="SciPy" class="skill-icon"> <span class="skill-name">SciPy</span><span class="proficiency-tag library">Intermediate</span></div>
+                    <div class="skill-card"><img src="{% static 'icons/matplotlib-icon.svg' %}" alt="Matplotlib" class="skill-icon"> <span class="skill-name">Matplotlib</span><span class="proficiency-tag library">Intermediate</span></div>
+                    <div class="skill-card"><img src="{% static 'icons/seaborn-icon.svg' %}" alt="Seaborn" class="skill-icon"> <span class="skill-name">Seaborn</span><span class="proficiency-tag library">Intermediate</span></div>
+                    <div class="skill-card"><img src="{% static 'icons/scikitlearn-icon.svg' %}" alt="Scikit-learn" class="skill-icon"> <span class="skill-name">Scikit-learn</span><span class="proficiency-tag library">Advanced</span></div>
+                    <div class="skill-card"><img src="{% static 'icons/cuda-icon.svg' %}" alt="CuPy" class="skill-icon"> <span class="skill-name">CuPy</span><span class="proficiency-tag library">Familiar</span></div>
+                    <div class="skill-card"><img src="{% static 'icons/cuda-icon.svg' %}" alt="cuFFT" class="skill-icon"> <span class="skill-name">cuFFT</span><span class="proficiency-tag library">Familiar</span></div>
+                </div>
+            </section>
+
+             <section class="skills-category">
+                <h2>Concepts & Methodologies (DS/ML)</h2>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <img src="{% static 'icons/ml-icon.svg' %}" alt="Machine Learning" class="skill-icon">
+                        <span class="skill-name">Machine Learning</span>
+                        <span class="proficiency-tag methodology">Advanced</span>
+                    </div>
+                    <div class="skill-card">
+                        {# Placeholder for Data Viz icon or generic #}
+                        <img src="{% static 'icons/dataviz_icon.svg' %}" alt="Data Visualization" class="skill-icon">
+                        <span class="skill-name">Data Visualization</span>
+                         <span class="proficiency-tag methodology">Intermediate</span>
+                    </div>
+                     <div class="skill-card">
+                        <span class="skill-name">ETL Processes</span>
+                        <span class="proficiency-tag methodology">Intermediate</span>
+                    </div>
+                    <div class="skill-card">
+                        <span class="skill-name">Data Pipeline Design</span>
+                        <span class="proficiency-tag methodology">Intermediate</span>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <div class="skill-view-section" id="common-skills-view" hidden>
+            <section class="skills-category">
+                <h2>Databases (Common)</h2>
+                <div class="skills-grid">
+                    <div class="skill-card"><img src="{% static 'icons/sql-icon.svg' %}" alt="SQL" class="skill-icon"> <span class="skill-name">SQL</span><span class="proficiency-tag database">Intermediate</span></div>
+                    <div class="skill-card"><img src="{% static 'icons/postgresql_icon.svg' %}" alt="PostgreSQL" class="skill-icon"> <span class="skill-name">PostgreSQL</span><span class="proficiency-tag database">Intermediate</span></div>
+                </div>
+            </section>
+
+            <section class="skills-category">
+                <h2>Development Tools (Common)</h2>
+                <div class="skills-grid">
+                    <div class="skill-card"><img src="{% static 'icons/jupyter_icon.svg' %}" alt="JupyterLab" class="skill-icon"> <span class="skill-name">Jupyter Lab</span><span class="proficiency-tag tool">Advanced</span></div>
+                    <div class="skill-card"><img src="{% static 'icons/github-icon.svg' %}" alt="Git" class="skill-icon"> <span class="skill-name">Git & GitHub</span><span class="proficiency-tag tool">Advanced</span></div>
+                    <div class="skill-card"><img src="{% static 'icons/endnote_icon.svg' %}" alt="EndNote" class="skill-icon"> <span class="skill-name">EndNote</span><span class="proficiency-tag tool">Intermediate</span></div>
+                </div>
+            </section>
+
+            <section class="skills-category">
+                <h2>Professional & Research Skills (Common)</h2>
+                <ul class="professional-skills-list">
+                    <li>Technical Writing</li>
+                    <li>Proposal Writing</li>
+                    <li>Data Analysis & Interpretation</li>
+                    <li>Problem Solving & Critical Thinking</li>
+                    <li>Communication & Collaboration</li>
+                    <li>Research Lab Methodologies</li>
+                </ul>
+            </section>
+        </div>
+    </div>
 </main>
 {% endblock %}
 
 {% block extra_js %}
 <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const viewToggleButtons = document.querySelectorAll('.view-toggle-btn');
+    const skillSections = {
+        swe: document.getElementById('swe-skills-view'),
+        dsml: document.getElementById('dsml-skills-view'),
+        common: document.getElementById('common-skills-view') // For skills relevant to both or 'all'
+    };
+
+    function updateView(activeView) {
+        viewToggleButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.view === activeView);
+        });
+
+        if (activeView === 'all') {
+            skillSections.swe.hidden = false;
+            skillSections.dsml.hidden = false;
+            skillSections.common.hidden = false; // Show common skills in 'all' view
+        } else {
+            skillSections.swe.hidden = (activeView !== 'swe');
+            skillSections.dsml.hidden = (activeView !== 'dsml');
+            skillSections.common.hidden = (activeView === 'swe' || activeView === 'dsml');
+        }
+        // Default to SWE view if no specific view is active (e.g., on page load)
+        if (!skillSections.swe.hidden || !skillSections.dsml.hidden || !skillSections.common.hidden) {
+             // A view is active or it's 'all'
+        } else {
+             skillSections.swe.hidden = false; // Default view
+        }
+    }
+
+    viewToggleButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            updateView(button.dataset.view);
+        });
+    });
+
+    // Initial view state (e.g., show SWE by default)
+    updateView('swe');
+});
 </script>
 {% endblock %}
