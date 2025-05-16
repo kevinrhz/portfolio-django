@@ -14,22 +14,20 @@
         <div class="plaque">
             <h1 class="name">Kevin Rahsaz</h1>
             <h2 class="job title">Software Engineer & Data Scientist</h2>
-            <div class="button-group">
-                <a href="{% url 'projects' %}" class="projects-button">Projects</a>
-                <a href="{% url 'skills' %}" class="skills-button">Skills</a>
-                <a href="{% static 'Kevin Rahsaz Resume update 2025.pdf' %}" class="resume-button" target="_blank">Resume</a>
+            {# Button group now only contains the Projects button #}
+            <div class="button-group single-button-group">
+                <a href="{% url 'projects' %}" class="projects-button main-action-button">View My Projects</a>
             </div>
         </div>
 
-        {# Updated Floating Scroll Prompt with Space Border #}
+        {# Floating Scroll Prompt for "About Me" - remains the same #}
         <a href="#about-me-landing-section" class="floating-scroll-prompt">
             <div class="prompt-text-container">
-                {# Corner SVG Borders - filenames updated below #}
                 <img src="{% static 'icons/arrow-topleft.svg' %}" alt="border" class="prompt-border-corner top-left">
                 <img src="{% static 'icons/arrow-topright.svg' %}" alt="border" class="prompt-border-corner top-right">
                 <span class="prompt-text">About Me</span>
-                <img src="{% static 'icons/arrow-downleft.svg' %}" alt="border" class="prompt-border-corner bottom-left"> {# Corrected filename #}
-                <img src="{% static 'icons/arrow-downright.svg' %}" alt="border" class="prompt-border-corner bottom-right"> {# Corrected filename #}
+                <img src="{% static 'icons/arrow-downleft.svg' %}" alt="border" class="prompt-border-corner bottom-left">
+                <img src="{% static 'icons/arrow-downright.svg' %}" alt="border" class="prompt-border-corner bottom-right">
             </div>
             <div class="prompt-icon-wrapper">
                  <div class="prompt-icon" style="-webkit-mask-image: url({% static 'icons/double-arrow-down.svg' %}); mask-image: url({% static 'icons/double-arrow-down.svg' %});"></div>
@@ -92,8 +90,7 @@
                     const navbar = document.querySelector('.navbar');
                     const navbarHeight = navbar ? navbar.offsetHeight : 0;
                     const elementPosition = targetElement.getBoundingClientRect().top;
-                    // Add a fixed offset if needed, e.g. 20px below the navbar
-                    const offsetPosition = elementPosition + window.pageYOffset - navbarHeight - 20;
+                    const offsetPosition = elementPosition + window.pageYOffset - navbarHeight - 20; // 20px offset below navbar
 
                     window.scrollTo({
                         top: offsetPosition,
