@@ -35,7 +35,7 @@
                             <li>Flask</li>
                             <li>PyQt6</li>
                         </ul>
-                        <span class="proficiency-tag swe-lang">Advanced</span>
+                        <span class="proficiency-tag advanced">Advanced</span>
                     </div>
                     <div class="skill-card language-card">
                         <div class="skill-card-header">
@@ -45,35 +45,35 @@
                          <ul class="frameworks-list">
                             <li>cuFFT (CUDA)</li>
                         </ul>
-                        <span class="proficiency-tag swe-lang">Intermediate</span>
+                        <span class="proficiency-tag advanced">Advanced</span>
                     </div>
                     <div class="skill-card language-card">
                         <div class="skill-card-header">
                             <img src="{% static 'icons/java-icon.svg' %}" alt="Java" class="skill-icon"> {# Placeholder #}
                             <span class="skill-name">Java</span>
                         </div>
-                        <span class="proficiency-tag swe-lang">Basic</span>
+                        <span class="proficiency-tag intermediate">Intermediate</span>
                     </div>
                     <div class="skill-card language-card">
                         <div class="skill-card-header">
                             <img src="{% static 'icons/js-icon.svg' %}" alt="JavaScript" class="skill-icon">
                             <span class="skill-name">JavaScript</span>
                         </div>
-                        <span class="proficiency-tag swe-lang">Basic</span>
+                        <span class="proficiency-tag intermediate">Intermediate</span>
                     </div>
                     <div class="skill-card language-card">
                         <div class="skill-card-header">
                             <img src="{% static 'icons/html-icon.svg' %}" alt="HTML" class="skill-icon">
                             <span class="skill-name">HTML</span>
                         </div>
-                        <span class="proficiency-tag swe-lang">Intermediate</span>
+                        <span class="proficiency-tag intermediate">Intermediate</span>
                     </div>
                     <div class="skill-card language-card">
                         <div class="skill-card-header">
                             <img src="{% static 'icons/css-icon.svg' %}" alt="CSS" class="skill-icon">
                             <span class="skill-name">CSS</span>
                         </div>
-                        <span class="proficiency-tag swe-lang">Intermediate</span>
+                        <span class="proficiency-tag intermediate">Intermediate</span>
                     </div>
                 </div>
             </section>
@@ -84,17 +84,17 @@
                     <div class="skill-card">
                         <img src="{% static 'icons/django-icon.svg' %}" alt="Django" class="skill-icon"> {# Placeholder #}
                         <span class="skill-name">Django</span>
-                        <span class="proficiency-tag framework">Intermediate</span>
+                        <span class="proficiency-tag intermediate">Intermediate</span>
                     </div>
                     <div class="skill-card">
                         <img src="{% static 'icons/flask-icon.svg' %}" alt="Flask" class="skill-icon">
                         <span class="skill-name">Flask</span>
-                        <span class="proficiency-tag framework">Intermediate</span>
+                        <span class="proficiency-tag intermediate">Intermediate</span>
                     </div>
                     <div class="skill-card">
                         <img src="{% static 'icons/pyqt6-icon.svg' %}" alt="PyQt6" class="skill-icon"> {# Placeholder #}
                         <span class="skill-name">PyQt6 (GUI)</span>
-                        <span class="proficiency-tag library">Intermediate</span>
+                        <span class="proficiency-tag intermediate">Intermediate</span>
                     </div>
                 </div>
             </section>
@@ -119,21 +119,21 @@
                             <img src="{% static 'icons/python-icon.svg' %}" alt="Python" class="skill-icon">
                             <span class="skill-name">Python</span>
                         </div>
-                        <span class="proficiency-tag dsml-lang">Advanced</span>
+                        <span class="proficiency-tag advanced">Advanced</span>
                     </div>
                      <div class="skill-card language-card">
                         <div class="skill-card-header">
                             <img src="{% static 'icons/sql-icon.svg' %}" alt="SQL" class="skill-icon">
                             <span class="skill-name">SQL</span>
                         </div>
-                        <span class="proficiency-tag dsml-lang">Intermediate</span>
+                        <span class="proficiency-tag intermediate">Intermediate</span>
                     </div>
                     <div class="skill-card language-card">
                         <div class="skill-card-header">
                              <img src="{% static 'icons/cplusplus-icon.svg' %}" alt="C++" class="skill-icon"> {# Placeholder #}
                             <span class="skill-name">C++ (for performance)</span>
                         </div>
-                        <span class="proficiency-tag dsml-lang">Intermediate</span>
+                        <span class="proficiency-tag intermediate">Intermediate</span>
                     </div>
                 </div>
             </section>
@@ -158,21 +158,21 @@
                     <div class="skill-card">
                         <img src="{% static 'icons/ml-icon.svg' %}" alt="Machine Learning" class="skill-icon">
                         <span class="skill-name">Machine Learning</span>
-                        <span class="proficiency-tag methodology">Advanced</span>
+                        <span class="proficiency-tag basic">Basic</span>
                     </div>
                     <div class="skill-card">
                         {# Placeholder for Data Viz icon or generic #}
                         <img src="{% static 'icons/dataviz_icon.svg' %}" alt="Data Visualization" class="skill-icon">
                         <span class="skill-name">Data Visualization</span>
-                         <span class="proficiency-tag methodology">Intermediate</span>
+                         <span class="proficiency-tag intermediate">Intermediate</span>
                     </div>
                      <div class="skill-card">
                         <span class="skill-name">ETL Processes</span>
-                        <span class="proficiency-tag methodology">Intermediate</span>
+                        <span class="proficiency-tag intermediate">Intermediate</span>
                     </div>
                     <div class="skill-card">
                         <span class="skill-name">Data Pipeline Design</span>
-                        <span class="proficiency-tag methodology">Intermediate</span>
+                        <span class="proficiency-tag intermediate">Intermediate</span>
                     </div>
                 </div>
             </section>
@@ -213,45 +213,5 @@
 {% endblock %}
 
 {% block extra_js %}
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    const viewToggleButtons = document.querySelectorAll('.view-toggle-btn');
-    const skillSections = {
-        swe: document.getElementById('swe-skills-view'),
-        dsml: document.getElementById('dsml-skills-view'),
-        common: document.getElementById('common-skills-view') // For skills relevant to both or 'all'
-    };
-
-    function updateView(activeView) {
-        viewToggleButtons.forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.view === activeView);
-        });
-
-        if (activeView === 'all') {
-            skillSections.swe.hidden = false;
-            skillSections.dsml.hidden = false;
-            skillSections.common.hidden = false; // Show common skills in 'all' view
-        } else {
-            skillSections.swe.hidden = (activeView !== 'swe');
-            skillSections.dsml.hidden = (activeView !== 'dsml');
-            skillSections.common.hidden = (activeView === 'swe' || activeView === 'dsml');
-        }
-        // Default to SWE view if no specific view is active (e.g., on page load)
-        if (!skillSections.swe.hidden || !skillSections.dsml.hidden || !skillSections.common.hidden) {
-             // A view is active or it's 'all'
-        } else {
-             skillSections.swe.hidden = false; // Default view
-        }
-    }
-
-    viewToggleButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            updateView(button.dataset.view);
-        });
-    });
-
-    // Initial view state (e.g., show SWE by default)
-    updateView('swe');
-});
-</script>
+<script src="{% static 'js/skills.js' %}"></script>
 {% endblock %}

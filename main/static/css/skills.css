@@ -1,5 +1,5 @@
 .skills-page {
-    max-width: 1300px; /* Slightly wider page container */
+    max-width: 1200px; /* Adjusted for potentially smaller cards */
     margin: 40px auto;
     padding: 20px;
     color: var(--text-color);
@@ -24,23 +24,22 @@
     margin: 0 auto 30px auto;
 }
 
-/* Updated Filter Button Styling */
 .skills-view-selector {
     display: flex;
     justify-content: center;
-    gap: 15px; /* Spacing between buttons */
-    margin-bottom: 50px; /* More space below buttons */
+    gap: 15px;
+    margin-bottom: 50px;
     flex-wrap: wrap;
 }
 
 .view-toggle-btn {
-    padding: 12px 28px; /* Comfortable padding */
-    font-size: 1rem;   /* Clear font size */
+    padding: 12px 28px;
+    font-size: 1rem;
     font-weight: bold;
     color: var(--text-color);
     background: linear-gradient(145deg, var(--accent-primary), var(--accent-secondary));
-    border: none; /* Remove default border */
-    border-radius: 8px; /* Consistent border-radius */
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
     transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
     text-transform: uppercase;
@@ -54,13 +53,12 @@
 }
 
 .view-toggle-btn.active {
-    background: var(--accent-secondary); /* Darker or distinct active state */
+    background: var(--accent-secondary);
     box-shadow: 0 2px 8px rgba(var(--accent-primary-rgb, 255, 69, 0), 0.5),
-                inset 0 2px 4px rgba(0,0,0,0.3); /* Inner shadow for pressed look */
-    transform: translateY(1px); /* Slight press effect */
+                inset 0 2px 4px rgba(0,0,0,0.3);
+    transform: translateY(1px);
     color: #fff;
 }
-
 
 .skill-view-section[hidden] {
     display: none;
@@ -75,131 +73,140 @@
     color: var(--accent-secondary);
     border-bottom: 2px solid var(--accent-primary);
     padding-bottom: 8px;
-    margin-bottom: 30px; /* Increased space after title */
+    margin-bottom: 30px;
 }
 
-/* Updated Skills Grid for better width utilization */
 .skills-grid, .languages-grid {
     display: grid;
-    /* Adjust minmax for card size. 300px min for slightly larger cards, allowing fewer per row on medium screens */
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px; /* Increased gap for better separation */
+    /* Adjust minmax for smaller card size. ~250px min could work */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px; /* Slightly reduced gap if cards are much smaller */
 }
 
 .skill-card {
-    background-color: rgba(45, 45, 55, 0.7); /* Slightly more defined card background */
+    background-color: rgba(45, 45, 55, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px; /* Softer radius */
-    padding: 25px; /* More padding within cards */
+    border-radius: 10px; /* Slightly smaller radius for smaller cards */
+    padding: 20px; /* Reduced padding for smaller cards */
     display: flex;
     flex-direction: column;
     align-items: center;
     text-align: center;
     transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
-    min-height: 200px; /* Increased base height for content */
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    min-height: 180px; /* Adjusted base height for smaller cards */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Adjusted shadow */
 }
 
 .skill-card:hover {
-    transform: translateY(-8px) scale(1.02); /* More noticeable hover effect */
+    transform: translateY(-6px) scale(1.02); /* Adjusted hover effect */
     border-color: var(--accent-primary);
-    box-shadow: 0 12px 30px rgba(var(--accent-primary-rgb, 255, 69, 0), 0.25);
+    box-shadow: 0 10px 25px rgba(var(--accent-primary-rgb, 255, 69, 0), 0.25);
 }
 
 .skill-card-header {
     display: flex;
     align-items: center;
-    margin-bottom: 15px; /* Increased space */
+    margin-bottom: 12px; /* Adjusted space */
     width: 100%;
     justify-content: center;
 }
 
 .skill-icon {
-    width: 36px; /* Larger icons */
-    height: 36px;
+    width: 72px;  /* Doubled from 36px */
+    height: 72px; /* Doubled from 36px */
     margin-right: 15px;
     object-fit: contain;
 }
 
 .skill-card .skill-name {
-    font-size: 1.3rem; /* Larger skill name */
+    font-size: 1.5rem; /* Increased font size from 1.3rem */
     font-weight: bold;
     color: var(--neutral-light);
-    margin-bottom: 10px; /* Space if no frameworks list */
+    margin-bottom: 8px;
 }
 
 .language-card .skill-name {
-    margin-bottom: 5px; /* Less margin if frameworks list follows */
+    margin-bottom: 5px;
 }
 
-/* Updated Frameworks/Libraries List Styling */
 .frameworks-list {
     list-style: none;
     padding: 0;
-    margin-top: 10px; /* Space above the list */
-    margin-bottom: 15px; /* Space below the list before proficiency tag */
-    font-size: 0.9rem; /* Clearer font size */
+    margin-top: 8px;
+    margin-bottom: 12px;
+    font-size: 0.85rem; /* Adjusted font size */
     color: var(--text-color);
     width: 100%;
     text-align: center;
     display: flex;
-    flex-wrap: wrap; /* Allow tags to wrap */
-    justify-content: center; /* Center tags */
-    gap: 8px; /* Gap between tags */
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
 }
 
 .frameworks-list li {
-    /* Style as tags/pills */
-    background-color: rgba(var(--accent-secondary-rgb, 211, 47, 47), 0.3); /* Use secondary accent */
-    padding: 5px 12px;
-    border-radius: 15px; /* Pill shape */
+    background-color: rgba(var(--accent-secondary-rgb, 211, 47, 47), 0.3);
+    padding: 4px 10px; /* Adjusted padding */
+    border-radius: 12px;
     opacity: 0.9;
     font-weight: 500;
     border: 1px solid rgba(var(--accent-secondary-rgb, 211, 47, 47), 0.5);
 }
 
 .proficiency-tag {
-    font-size: 0.75rem; /* Adjusted size */
-    padding: 5px 12px; /* More padding */
-    border-radius: 15px; /* Pill shape for consistency */
+    font-size: 0.8rem; /* Adjusted size for potentially smaller cards */
+    padding: 6px 14px; /* Adjusted padding */
+    border-radius: 15px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     margin-top: auto;
     align-self: center;
     white-space: nowrap;
-    border: 1px solid transparent; /* Base border */
+    color: white; /* Default text color for tags */
+    border: 1px solid transparent;
 }
 
-/* Proficiency Tag Colors & Level Indicators */
-.proficiency-tag.swe-lang     { background-color: #007ACC; color: white; }
-.proficiency-tag.dsml-lang    { background-color: #4CAF50; color: white; }
-.proficiency-tag.framework    { background-color: #2196F3; color: white; } /* Changed from React Blue */
-.proficiency-tag.library      { background-color: #9C27B0; color: white; } /* Changed from Purple */
-.proficiency-tag.devops       { background-color: #F44336; color: white; }
-.proficiency-tag.database     { background-color: #FF9800; color: black; }
-.proficiency-tag.tool         { background-color: #607D8B; color: white; }
-.proficiency-tag.methodology  { background-color: #795548; color: white; } /* Changed from Brown */
+/* Skill Level Colors - Orange to Red */
+.proficiency-tag.basic {
+    background-color: #FFA500; /* Orange */
+    border-color: #EE9A00;     /* Slightly darker, less saturated orange for border */
+    color: #000000; /* Black text for better contrast on lighter orange */
+}
+.proficiency-tag.intermediate {
+    background-color: #FF7F00; /* Vibrant Orange - more orange */
+    border-color: #E67300;     /* Darker vibrant orange for border */
+    color: #FFFFFF; /* White text */
+}
+.proficiency-tag.advanced {
+    background-color: #FF5733; /* Slightly more reddish orange than Tomato - very slightly more red */
+    border-color: #E64A2E;     /* Darker reddish orange for border */
+    color: #FFFFFF; /* White text */
+}
+.proficiency-tag.expert {
+    background-color: #F03A17; /* A strong, fiery red-orange - more red */
+    border-color: #D93114;     /* Darker fiery red-orange for border */
+    color: #FFFFFF; /* White text */
+}
 
-.proficiency-tag.Advanced     { border-color: #FFD700; /* Gold */ box-shadow: 0 0 5px #FFD700; }
-.proficiency-tag.Intermediate { border-color: #C0C0C0; /* Silver */ }
-.proficiency-tag.Familiar     { border-color: #CD7F32; /* Bronze */ }
-.proficiency-tag.Basic        { border-color: #777; }
+/* Keep other specific tag styles if needed, or remove if replaced by level colors */
+/* Example: if you still want to differentiate DS/ML languages by a base color before the level */
+.proficiency-tag.dsml-lang.basic { background-color: #FFA500; /* ... */ }
 
 
 .professional-skills-list {
     list-style: none;
     padding-left: 0;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 15px; /* Increased gap */
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Adjusted for potentially smaller cards */
+    gap: 12px;
 }
 
 .professional-skills-list li {
     background-color: rgba(255, 255, 255, 0.04);
-    padding: 18px 20px; /* More padding */
-    border-radius: 8px; /* Consistent radius */
-    font-size: 1rem;
+    padding: 16px 18px; /* Adjusted padding */
+    border-radius: 8px;
+    font-size: 0.95rem; /* Adjusted font size */
     border-left: 4px solid var(--accent-secondary);
     transition: background-color 0.2s ease, border-left-color 0.2s ease;
 }
@@ -209,32 +216,35 @@
 }
 
 /* Responsive Adjustments */
-@media (max-width: 992px) { /* Add a breakpoint for slightly larger screens */
+@media (max-width: 992px) {
     .skills-grid, .languages-grid {
-        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Adjust for tablets */
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); /* Adjust for tablets */
     }
+    .skill-icon { width: 60px; height: 60px; } /* Adjust icon size for tablets */
+    .skill-card .skill-name { font-size: 1.35rem; }
 }
 
 @media (max-width: 768px) {
-    .skills-page { max-width: 100%; padding: 20px 15px; } /* Full width on smaller screens */
+    .skills-page { max-width: 100%; padding: 20px 15px; }
     .skills-header h1 { font-size: 2.2rem; }
     .skills-category h2 { font-size: 1.6rem; }
     .skills-grid, .languages-grid {
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); /* Further adjust for smaller tablets */
-        gap: 20px; /* Slightly reduce gap */
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Further adjust */
+        gap: 20px;
     }
-    .view-toggle-btn { font-size: 0.9rem; padding: 10px 20px; } /* Smaller filter buttons */
-    .skill-card { padding: 20px; min-height: 180px; }
-    .skill-card .skill-name { font-size: 1.15rem; }
-    .frameworks-list li { padding: 4px 10px; font-size: 0.8rem;}
+    .view-toggle-btn { font-size: 0.9rem; padding: 10px 20px; }
+    .skill-card { padding: 15px; min-height: 170px; } /* Adjusted for smaller cards */
+    .skill-icon { width: 56px; height: 56px; } /* Further adjust icon size */
+    .skill-card .skill-name { font-size: 1.25rem; }
+    .frameworks-list li { padding: 3px 8px; font-size: 0.75rem;}
 }
 
 @media (max-width: 480px) {
-    .skills-grid, .languages-grid { grid-template-columns: 1fr; }
+    .skills-grid, .languages-grid { grid-template-columns: 1fr; } /* Single column on small screens */
     .professional-skills-list { grid-template-columns: 1fr; }
     .view-toggle-btn { width: calc(50% - 10px); margin-bottom: 10px; font-size: 0.85rem; padding: 10px 15px; }
-    .view-toggle-btn[data-view="all"] { width: 100%; } /* "View All" button takes full width */
+    .view-toggle-btn[data-view="all"] { width: 100%; }
     .skill-card { min-height: auto; padding: 15px; }
-    .skill-icon { width: 28px; height: 28px; margin-right: 10px; }
-    .skill-card .skill-name { font-size: 1.1rem; }
+    .skill-icon { width: 48px; height: 48px; margin-right: 10px; } /* Adjust for smallest screens */
+    .skill-card .skill-name { font-size: 1.15rem; }
 }
