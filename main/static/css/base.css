@@ -4,6 +4,9 @@
   --accent-primary: #FF4500;
   --accent-secondary: #D32F2F;
   --neutral-light: #B0B0B0;
+  --accent-primary-glow: rgba(255, 69, 0, 0.7);
+  --border-corner-size: 25px;
+  --border-offset: -15px;
 }
 
 body {

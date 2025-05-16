@@ -10,49 +10,109 @@
 
 {% block content %}
 <div class="hero">
-    <div class="container">
+    <div class="container hero-content-container">
         <div class="plaque">
             <h1 class="name">Kevin Rahsaz</h1>
             <h2 class="job title">Software Engineer & Data Scientist</h2>
-
             <div class="button-group">
                 <a href="{% url 'projects' %}" class="projects-button">Projects</a>
                 <a href="{% url 'skills' %}" class="skills-button">Skills</a>
-                <a href="{% url 'contact' %}" class="contact-button">Contact</a>
-                <a href="{% static 'resume.pdf' %}" class="resume-button" target="_blank">Resume</a>
+                <a href="{% static 'Kevin Rahsaz Resume update 2025.pdf' %}" class="resume-button" target="_blank">Resume</a>
             </div>
         </div>
 
-        <div class="social-icons">
-            <a href="https://github.com/kevinrhz" target="_blank">
-                <img src="{% static 'icons/github-icon.svg' %}" alt="GitHub Icon">
-            </a>
-            <a href="https://instagram.com/kevmo.bc" target="_blank">
-                <img src="{% static 'icons/instagram-icon.svg' %}" alt="Instagram Icon">
-            </a>
-            <a href="https://linkedin.com/in/kevin-rahsaz-832a7420a/" target="_blank">
-                <img src="{% static 'icons/linkedin-icon.svg' %}" alt="LinkedIn Icon">
-            </a>
-        </div>
+        {# Updated Floating Scroll Prompt with Space Border #}
+        <a href="#about-me-landing-section" class="floating-scroll-prompt">
+            <div class="prompt-text-container">
+                {# Corner SVG Borders - filenames updated below #}
+                <img src="{% static 'icons/arrow-topleft.svg' %}" alt="border" class="prompt-border-corner top-left">
+                <img src="{% static 'icons/arrow-topright.svg' %}" alt="border" class="prompt-border-corner top-right">
+                <span class="prompt-text">About Me</span>
+                <img src="{% static 'icons/arrow-downleft.svg' %}" alt="border" class="prompt-border-corner bottom-left"> {# Corrected filename #}
+                <img src="{% static 'icons/arrow-downright.svg' %}" alt="border" class="prompt-border-corner bottom-right"> {# Corrected filename #}
+            </div>
+            <div class="prompt-icon-wrapper">
+                 <div class="prompt-icon" style="-webkit-mask-image: url({% static 'icons/double-arrow-down.svg' %}); mask-image: url({% static 'icons/double-arrow-down.svg' %});"></div>
+            </div>
+        </a>
+    </div>
+
+    <div class="social-icons">
+        <a href="https://github.com/kevinrhz" target="_blank"><img src="{% static 'icons/github-icon.svg' %}" alt="GitHub Icon"></a>
+        <a href="https://instagram.com/kevmo.bc" target="_blank"><img src="{% static 'icons/instagram-icon.svg' %}" alt="Instagram Icon"></a>
+        <a href="https://linkedin.com/in/kevin-rahsaz-832a7420a/" target="_blank"><img src="{% static 'icons/linkedin-icon.svg' %}" alt="LinkedIn Icon"></a>
     </div>
 </div>
+
+<section id="about-me-landing-section" class="about-me-section">
+    <div class="container about-me-container">
+        <h2>About Me</h2>
+        <div class="about-me-content-wrapper">
+            <article class="about-intro-condensed">
+                <p>
+                    I am a highly motivated Software Engineer and Data Scientist with a passion for building innovative solutions and extracting actionable insights from data. I specialize in developing scalable web applications using Python and Django, and applying machine learning techniques to solve complex problems. My goal is to leverage my skills to contribute to a dynamic team and create impactful technology.
+                </p>
+            </article>
+            <article class="about-background-condensed">
+                <h3>Background & Achievements</h3>
+                <p>
+                    Holding a BS in Computer Science (expected 2026), my journey has been fueled by a blend of academic learning and self-driven exploration into data science. I'm focused on leveraging this foundation to contribute to the machine learning field.
+                </p>
+                <ul class="achievements-list">
+                    <li>Developed a Django-based e-commerce platform that increased online sales by 20%.</li>
+                    <li>Built a machine learning model to predict customer churn with 90% accuracy.</li>
+                    <li>Led a team of 3 engineers in deploying a RESTful API for a high-traffic application.</li>
+                </ul>
+                 <p class="resume-prompt"><em>(Key achievements adapted for brevity. Full details in <a href="{% static 'Kevin Rahsaz Resume update 2025.pdf' %}" target="_blank">my resume</a>.)</em></p>
+            </article>
+            <article class="about-skills-summary-condensed">
+                <h3>Core Competencies</h3>
+                <p>
+                    My core competencies include Python, Django, JavaScript, SQL, Machine Learning, and Data Visualization. I am proficient in the full software development lifecycle and experienced in applying data science methodologies.
+                </p>
+                <div class="about-me-cta">
+                    <a href="{% url 'skills' %}" class="cta-button-alt">View All Skills</a>
+                    <a href="{% url 'about' %}" class="cta-button-alt">More About Me</a>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
 {% endblock %}
 
 {% block extra_js %}
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-        const aboutMeButton = document.getElementById('about-me-btn');
-        const aboutMeSection = document.getElementById('about-me-section');
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const navbar = document.querySelector('.navbar');
+                    const navbarHeight = navbar ? navbar.offsetHeight : 0;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    // Add a fixed offset if needed, e.g. 20px below the navbar
+                    const offsetPosition = elementPosition + window.pageYOffset - navbarHeight - 20;
 
-        aboutMeButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            if (aboutMeSection) {
-                aboutMeSection.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
         });
+
+        const floatingPrompt = document.querySelector('.floating-scroll-prompt');
+        if (floatingPrompt) {
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    floatingPrompt.style.opacity = '0.7';
+                } else {
+                    floatingPrompt.style.opacity = '1';
+                }
+            });
+        }
     });
 </script>
 {% endblock %}
