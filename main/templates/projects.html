@@ -8,70 +8,169 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'js/projects.js' %}"></script>
+<script src="{% static 'js/projects.js' %}" defer></script>
 {% endblock %}
 
 {% block content %}
 <main class="projects-page">
     <h1 class="section-title">Projects</h1>
 
-    <!-- Grid Layout for Projects -->
     <section class="projects-grid">
-        <!-- CineSteam Project Card -->
-        <div class="project-card">
-            <img src="{% static 'images/CineSteamLogo.webp' %}" alt="CineSteamLogo">
+        <div class="project-card" data-project-id="echolab">
+            <img src="{% static 'images/project_posters/poster-echolab.png' %}" alt="Echolab Project Poster" class="project-image">
             <div class="project-details">
-                <h2>CineSteam</h2>
-                <p>A PostgreSQL relational database integrating IMDB's top 1000 Movies and Steam's 2025 game dataset for data analysis, SQL queries, and ETL with Python.</p>
-                <ul class="tech-stack">
+                <p class="short-description">Real-time audio spectrum analysis & visualization using Python and CUDA.</p>
+                <div class="project-links">
+                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/kevinrhz/Echolab" class="btn">GitHub</a>
+                    <a href="#" class="btn btn-details">Details</a>
+                </div>
+            </div>
+            <div class="project-expanded-content">
+                 <h2>Echolab</h2>
+                 <h4>Real-time Signal Processing</h4>
+                 <p class="long-description">Echolab is a desktop application designed for advanced audio analysis, capable of processing signals in real-time. It features a PyQt6 GUI and leverages NumPy/SciPy for core signal processing, with experimental CUDA integration for accelerated FFT computations. Visualizations include waveform, spectrum, and spectrogram displays.</p>
+                 <ul class="tech-stack">
+                    <li>Python</li>
+                    <li>PyQt6</li>
+                    <li>NumPy</li>
+                    <li>SciPy</li>
+                    <li>Matplotlib</li>
+                    <li>CUDA</li>
+                 </ul>
+            </div>
+        </div>
+
+        <div class="project-card" data-project-id="cinesteam">
+            <img src="{% static 'images/project_posters/poster-cinesteam.png' %}" alt="CineSteam Project" class="project-image">
+            <div class="project-details">
+                <p class="short-description">PostgreSQL DB integrating IMDB & Steam datasets for analysis and ETL.</p>
+                <div class="project-links">
+                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/kevinrhz/CineSteam" class="btn">GitHub</a>
+                    <a href="{% url 'cinesteam_demo' %}" class="btn">Demo</a>
+                    <a href="#" class="btn btn-details">Details</a>
+                </div>
+            </div>
+            <div class="project-expanded-content">
+                 <h2>CineSteam</h2>
+                 <p class="long-description">A PostgreSQL relational database integrating IMDB's top 1000 Movies and Steam's 2025 game dataset for data analysis, SQL queries, and ETL with Python. This project involved designing the database schema, implementing ETL pipelines with Pandas, and performing complex SQL queries to derive insights.</p>
+                 <ul class="tech-stack">
                     <li>Python</li>
                     <li>PostgreSQL</li>
                     <li>pandas</li>
                     <li>psycopg2</li>
                     <li>ETL</li>
-                </ul>
-                <div class="project-links">
-                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/kevinrhz/CineSteam" class="btn">GitHub</a>
-                    <a href="{% url 'cinesteam_demo' %}" class="btn">Demo</a>
-                </div>
+                 </ul>
             </div>
         </div>
 
-        <!-- Custom Gaming PC Project Card -->
-        <div class="project-card">
-            <img src="{% static 'images/close up.jpeg' %}" alt="Custom PC Build">
+        <div class="project-card" data-project-id="pcbuild">
+            <img src="{% static 'images/close up.jpeg' %}" alt="Custom PC Build" class="project-image">
             <div class="project-details">
-                <h2>Custom PC Build</h2>
-                <p>An advanced liquid-cooled custom-built PC for peak gaming and productivity.</p>
-                <ul class="tech-stack">
+                <p class="short-description">Advanced liquid-cooled custom PC for peak gaming & productivity.</p>
+                <div class="project-links">
+                    <a href="{% url 'gallery_pc' %}" class="btn">Gallery</a>
+                    <a href="#" class="btn btn-details">Details</a>
+                </div>
+            </div>
+            <div class="project-expanded-content">
+                 <h2>Custom PC Build</h2>
+                 <p class="long-description">An advanced liquid-cooled custom-built PC designed and assembled for maximum performance in gaming and demanding productivity tasks. Features a custom cooling loop, meticulous cable management, and hardware tuning for optimal stability and performance.</p>
+                 <ul class="tech-stack">
                     <li>Custom Cooling Loop</li>
-                    <li>Hardware Tuning</li>
-                    <li>Troubleshooting</li>
-                </ul>
-                <div class="project-links">
-                    <a href="#" class="btn">Gallery</a>
-                </div>
+                    <li>Hardware Selection</li>
+                    <li>Cable Management</li>
+                    <li>Performance Tuning</li>
+                 </ul>
             </div>
         </div>
 
-        <!-- PyFileManager Project Card -->
-        <div class="project-card">
-            <img src="{% static 'images/PyFileManagerLogo.webp' %}" alt="PyFileManager">
+        <div class="project-card" data-project-id="pyfilemanager">
+            <img src="{% static 'images/PyFileManagerLogo.webp' %}" alt="PyFileManager Project" class="project-image">
             <div class="project-details">
-                <h2>PyFileManager</h2>
-                <p>A file management system with GUI. Features file browsing, search, deletion and creation.</p>
-                <ul class="tech-stack">
+                <p class="short-description">Python-based file management system with a PyQt6 GUI.</p>
+                <div class="project-links">
+                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/kevinrhz/PyFileManager" class="btn">GitHub</a>
+                    <a href="#" class="btn btn-details">Details</a>
+                </div>
+            </div>
+            <div class="project-expanded-content">
+                 <h2>PyFileManager</h2>
+                 <p class="long-description">A file management system with a graphical user interface built using Python and PyQt6. It provides essential file operations such as Browse directories, searching for files, creating new files/folders, and deleting items. Utilizes `pathlib` and `os` modules for robust file system interaction.</p>
+                 <ul class="tech-stack">
                     <li>Python</li>
                     <li>PyQt6</li>
                     <li>pathlib</li>
                     <li>os</li>
-                </ul>
-                <div class="project-links">
-                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/kevinrhz/PyFileManager" class="btn">GitHub</a>
-                    <a href="#" class="btn">Live Demo</a>
-                </div>
+                 </ul>
             </div>
         </div>
+
+        <div class="project-card" data-project-id="portfolio-django">
+            <img src="{% static 'images/project_posters/poster-portfolio-django.png' %}" alt="Portfolio Django Project" class="project-image">
+            <div class="project-details">
+                <p class="short-description">This portfolio! Rebuilt with Django for scalability and modern practices.</p>
+                <div class="project-links">
+                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/kevinrhz/portfolio-django" class="btn">GitHub</a>
+                    <a href="#" class="btn btn-details">Details</a>
+                </div>
+            </div>
+            <div class="project-expanded-content">
+                 <h2>Portfolio Django (This Site)</h2>
+                 <p class="long-description">The current iteration of my personal portfolio, rebuilt using the Django framework. This project showcases my skills in full-stack development with Python, database design (planned with PostgreSQL), responsive frontend design with HTML/CSS/JavaScript, and adherence to modern web development practices, including plans for CI/CD integration.</p>
+                 <ul class="tech-stack">
+                    <li>Django</li>
+                    <li>Python</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                 </ul>
+            </div>
+        </div>
+
+        <div class="project-card" data-project-id="portfolio-flask">
+            <img src="{% static 'images/project_posters/poster-portfolio-flask.png' %}" alt="Portfolio Flask Project" class="project-image">
+            <div class="project-details">
+                <p class="short-description">My first portfolio, built with Flask, showcasing web fundamentals.</p>
+                <div class="project-links">
+                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/kevinrhz/Portfolio-Flask-Legacy" class="btn">GitHub</a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://kevinrahsaz.com" class="btn">Live Site</a>
+                    <a href="#" class="btn btn-details">Details</a>
+                </div>
+            </div>
+            <div class="project-expanded-content">
+                 <h2>Portfolio Flask (Legacy)</h2>
+                 <p class="long-description">My first personal portfolio website, developed with the Flask microframework and SQLAlchemy for database interactions. This earlier version served as a practical learning ground for web fundamentals, routing, template rendering, and deploying Python web applications.</p>
+                 <ul class="tech-stack">
+                    <li>Flask</li>
+                    <li>Python</li>
+                    <li>SQLAlchemy</li>
+                    <li>HTML</li>
+                    <li>CSS</li>
+                 </ul>
+            </div>
+        </div>
+
+        <div class="project-card" data-project-id="cuda-fft">
+            <img src="{% static 'images/project_posters/poster-cuda-fft.png' %}" alt="CUDA FFT Project" class="project-image">
+            <div class="project-details">
+                <p class="short-description">High-performance FFT accelerated with NVIDIA CUDA in C++.</p>
+                <div class="project-links">
+                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/kevinrhz/CUDA-FFT-Explorer" class="btn">GitHub</a>
+                    <a href="#" class="btn btn-details">Details</a>
+                </div>
+            </div>
+            <div class="project-expanded-content">
+                 <h2>CUDA FFT Explorer</h2>
+                 <p class="long-description">An exploration into high-performance computing by implementing Fast Fourier Transforms (FFT) accelerated with NVIDIA CUDA in C++. This project focuses on understanding and applying parallel programming paradigms, CUDA architecture, and GPU optimization techniques for computationally intensive signal processing tasks. Python was used for generating test data and validating results.</p>
+                 <ul class="tech-stack">
+                    <li>C++</li>
+                    <li>CUDA</li>
+                    <li>cuFFT</li>
+                    <li>Python</li>
+                 </ul>
+            </div>
+        </div>
+
     </section>
 </main>
 {% endblock %}

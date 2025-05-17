@@ -13,3 +13,5 @@ venv/
 # VSCode or IDE junk
 .vscode/
 *.log
+
+.png
