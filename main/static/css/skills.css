@@ -36,12 +36,13 @@
     padding: 12px 28px;
     font-size: 1rem;
     font-weight: bold;
-    color: var(--text-color);
-    background: linear-gradient(145deg, var(--accent-primary), var(--accent-secondary));
+    /* Default state for all buttons (inactive, primarily for "All Skills") */
+    color: var(--text-color); /* Default white text */
+    background: linear-gradient(145deg, var(--accent-primary), var(--accent-secondary)); /* Default orange-red gradient */
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.2);
@@ -58,6 +59,81 @@
                 inset 0 2px 4px rgba(0,0,0,0.3);
     transform: translateY(1px);
     color: #fff;
+}
+
+/* --- "All Skills" Button States (Orange/Red Theme) --- */
+.view-toggle-btn[data-view="all"]:hover:not(.active) {
+    transform: translateY(-2px);
+    /* Stays the default orange-red gradient on hover */
+    box-shadow: 0 6px 15px rgba(var(--accent-primary-rgb, 255, 69, 0), 0.4);
+}
+
+.view-toggle-btn[data-view="all"].active {
+    background: var(--accent-secondary); /* Darker red for active */
+    box-shadow: 0 2px 8px rgba(var(--accent-primary-rgb, 255, 69, 0), 0.5),
+                inset 0 2px 4px rgba(0,0,0,0.3);
+    transform: translateY(1px);
+    color: #fff; /* Ensure white text */
+}
+
+.view-toggle-btn[data-view="all"].active:hover {
+    background: var(--accent-primary); /* Lighter red on hover when active */
+    box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb, 255, 69, 0), 0.6),
+                inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* --- Data Science & ML Button States (Blue Theme) --- */
+.view-toggle-btn[data-view="dsml"] {
+    /* Inherits default orange/red when inactive and not hovered */
+}
+
+.view-toggle-btn[data-view="dsml"]:hover:not(.active) {
+    background: linear-gradient(145deg, #60A5FA, #3B82F6); /* Light blue to medium blue gradient */
+    box-shadow: 0 6px 15px rgba(59, 130, 246, 0.35); /* Blue glow */
+    color: #fff; /* Ensure white text */
+    transform: translateY(-2px);
+}
+
+.view-toggle-btn[data-view="dsml"].active {
+    background: #2563EB; /* A solid, rich blue (Tailwind Blue 600) */
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.5), /* Blue glow */
+                inset 0 2px 4px rgba(0,0,0,0.3);
+    transform: translateY(1px);
+    color: #fff; /* Ensure white text */
+}
+
+.view-toggle-btn[data-view="dsml"].active:hover {
+    background: #1D4ED8; /* Darker blue for hover when active (Tailwind Blue 700) */
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.6),
+                inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* --- Software Engineering Button States (Yellow/Gold Theme) --- */
+.view-toggle-btn[data-view="swe"] {
+    /* Inherits default orange/red when inactive and not hovered */
+    /* Text color will be white by default, changes on hover/active */
+}
+
+.view-toggle-btn[data-view="swe"]:hover:not(.active) {
+    background: linear-gradient(145deg, #FDE047, #FACC15); /* Light yellow to gold gradient */
+    box-shadow: 0 6px 15px rgba(250, 204, 21, 0.35); /* Yellow glow */
+    color: #1E293B; /* Dark text for yellow */
+    transform: translateY(-2px);
+}
+
+.view-toggle-btn[data-view="swe"].active {
+    background: #EAB308; /* A solid, rich gold (Tailwind Yellow 500) */
+    box-shadow: 0 2px 8px rgba(250, 204, 21, 0.5), /* Yellow glow */
+                inset 0 2px 4px rgba(0,0,0,0.3);
+    transform: translateY(1px);
+    color: #1E293B; /* Dark text for yellow */
+}
+
+.view-toggle-btn[data-view="swe"].active:hover {
+    background: #CA8A04; /* Darker gold for hover when active (Tailwind Yellow 600) */
+    box-shadow: 0 4px 12px rgba(250, 204, 21, 0.6),
+                inset 0 2px 4px rgba(0,0,0,0.3);
+    color: #1E293B; /* Dark text for yellow */
 }
 
 .skill-view-section[hidden] {
@@ -78,9 +154,9 @@
 
 .skills-grid, .languages-grid {
     display: grid;
-    /* Adjust minmax for smaller card size. ~250px min could work */
+    /* Adjust minmax for smaller card size. */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 25px; /* Slightly reduced gap if cards are much smaller */
+    gap: 25px;
 }
 
 .skill-card {
@@ -220,7 +296,7 @@
     .skills-grid, .languages-grid {
         grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); /* Adjust for tablets */
     }
-    .skill-icon { width: 60px; height: 60px; } /* Adjust icon size for tablets */
+    .skill-icon { width: 60px; height: 60px; }
     .skill-card .skill-name { font-size: 1.35rem; }
 }
 
@@ -230,21 +306,50 @@
     .skills-category h2 { font-size: 1.6rem; }
     .skills-grid, .languages-grid {
         grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Further adjust */
-        gap: 20px;
+        gap: 20px; /* Gap for smaller tablets */
     }
     .view-toggle-btn { font-size: 0.9rem; padding: 10px 20px; }
-    .skill-card { padding: 15px; min-height: 170px; } /* Adjusted for smaller cards */
-    .skill-icon { width: 56px; height: 56px; } /* Further adjust icon size */
+    .skill-card { padding: 15px; min-height: 170px; }
+    .skill-icon { width: 56px; height: 56px; }
     .skill-card .skill-name { font-size: 1.25rem; }
     .frameworks-list li { padding: 3px 8px; font-size: 0.75rem;}
 }
 
 @media (max-width: 480px) {
-    .skills-grid, .languages-grid { grid-template-columns: 1fr; } /* Single column on small screens */
-    .professional-skills-list { grid-template-columns: 1fr; }
-    .view-toggle-btn { width: calc(50% - 10px); margin-bottom: 10px; font-size: 0.85rem; padding: 10px 15px; }
-    .view-toggle-btn[data-view="all"] { width: 100%; }
-    .skill-card { min-height: auto; padding: 15px; }
-    .skill-icon { width: 48px; height: 48px; margin-right: 10px; } /* Adjust for smallest screens */
-    .skill-card .skill-name { font-size: 1.15rem; }
+    .skills-grid, .languages-grid {
+        grid-template-columns: repeat(2, 1fr); /* MODIFIED: 2 columns */
+        gap: 15px; /* MODIFIED: Slightly reduced gap for 2 columns on small screens */
+    }
+    .professional-skills-list {
+        grid-template-columns: 1fr; /* This can remain 1 column if preferred */
+    }
+    .view-toggle-btn {
+        width: calc(50% - 10px); /* Adjust if needed due to parent padding/margins */
+        margin-bottom: 10px;
+        font-size: 0.85rem;
+        padding: 10px 15px;
+    }
+    .view-toggle-btn[data-view="all"] {
+        width: 100%;
+    }
+    .skill-card {
+        min-height: auto; /* Keep this */
+        padding: 12px; /* Slightly adjust padding if needed for card content */
+    }
+    .skill-icon {
+        width: 40px; /* Slightly reduce icon size if cards become too narrow */
+        height: 40px;
+        margin-right: 8px;
+    }
+    .skill-card .skill-name {
+        font-size: 1.05rem; /* Adjust skill name font size if needed */
+    }
+    .proficiency-tag {
+        font-size: 0.7rem; /* Adjust proficiency tag font size */
+        padding: 4px 10px;
+    }
+    .frameworks-list li {
+        padding: 2px 6px;
+        font-size: 0.7rem;
+    }
 }
