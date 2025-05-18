@@ -5,259 +5,129 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/skills.css' %}">
+<link rel="stylesheet" href="{% static 'css/filter_buttons.css' %}"> {# If you created a shared filter button CSS #}
 {% endblock %}
 
 {% block content %}
 <main class="skills-page">
-    <header class="skills-header">
+    <header class="skills-header section-header"> {# Consistent header styling #}
         <h1>Skills & Expertise</h1>
         <p class="subtitle">Explore my skills tailored to your interest, or view all.</p>
-        <div class="skills-view-selector">
-            <button class="view-toggle-btn" data-view="all">View All Skills</button>
-            <button class="view-toggle-btn" data-view="swe">Software Engineering</button>
-            <button class="view-toggle-btn" data-view="dsml">Data Science & ML</button>
+        <div class="view-selector skills-filters"> {# Ensure this class matches JS selector if using generic filter system #}
+            <button class="view-toggle-btn" data-filter="all" data-view="all">View All Skills</button> {# data-view for original JS, data-filter for new #}
+            <button class="view-toggle-btn" data-filter="swe" data-view="swe">Software Engineering</button>
+            <button class="view-toggle-btn" data-filter="dsml" data-view="dsml">Data Science & ML</button>
         </div>
     </header>
 
-    <div class="skills-content-container">
-
+    <div class="skills-content-container filterable-content">
+        {# Software Engineering Skills - Rendered from Database #}
         <div class="skill-view-section" id="swe-skills-view">
-            <section class="skills-category">
-                <h2>Languages (SWE)</h2>
-                <div class="skills-grid">
-                    <div class="skill-card language-card">
-                        <div class="skill-card-header">
-                            {# Python - Assuming COLORED icon #}
-                            <img src="{% static 'icons/python-icon.svg' %}" alt="Python" class="skill-icon">
-                            <span class="skill-name">Python</span>
+            {% if swe_skills_grouped %}
+                {% for sub_category, skills_in_sub in swe_skills_grouped.items %}
+                <section class="skills-category">
+                    <h2>{{ sub_category }} (SWE)</h2>
+                    <div class="skills-grid">
+                        {% for skill in skills_in_sub %}
+                        <div class="skill-card {% if skill.associated_frameworks %}language-card{% endif %}">
+                            <div class="skill-card-header">
+                                {% if skill.icon_path %}
+                                <img src="{% static skill.icon_path %}" alt="{{ skill.name }} Icon"
+                                     class="skill-icon {% if skill.icon_recolor %}icon-recolor{% endif %}"
+                                     {% if skill.icon_recolor %}style="-webkit-mask-image: url({% static skill.icon_path %}); mask-image: url({% static skill.icon_path %});"{% endif %}>
+                                {% endif %}
+                                <span class="skill-name">{{ skill.name }}</span>
+                            </div>
+                            {% if skill.associated_frameworks %}
+                            <ul class="frameworks-list">
+                                {% for framework in skill.get_associated_frameworks_list %}  {# MODIFIED #}
+                                    <li>{{ framework }}</li> {# No need for |strip here as the method handles it #}
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <span class="proficiency-tag {{ skill.level }}">{{ skill.get_level_display }}</span>
                         </div>
-                        <ul class="frameworks-list">
-                            <li>Django</li>
-                            <li>Flask</li>
-                            <li>PyQt6</li>
-                            <li>ctypes (Intermediate)</li> {# ADDED ctypes here #}
-                        </ul>
-                        <span class="proficiency-tag advanced">Advanced</span>
+                        {% endfor %}
                     </div>
-                    <div class="skill-card language-card">
-                        <div class="skill-card-header">
-                            {# C++ - Assuming BLACK icon #}
-                            <img src="{% static 'icons/cplusplus-icon.svg' %}" alt="C++" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/cplusplus-icon.svg' %}); mask-image: url({% static 'icons/cplusplus-icon.svg' %});">
-                            <span class="skill-name">C++</span>
-                        </div>
-                         <ul class="frameworks-list">
-                            <li>cuFFT (CUDA)</li>
-                        </ul>
-                        <span class="proficiency-tag intermediate">Intermediate</span>
-                    </div>
-                    <div class="skill-card language-card">
-                        <div class="skill-card-header">
-                            {# Java - Assuming BLACK icon #}
-                            <img src="{% static 'icons/java-icon.svg' %}" alt="Java" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/java-icon.svg' %}); mask-image: url({% static 'icons/java-icon.svg' %});">
-                            <span class="skill-name">Java</span>
-                        </div>
-                        <span class="proficiency-tag intermediate">Intermediate</span>
-                    </div>
-                    <div class="skill-card language-card">
-                        <div class="skill-card-header">
-                            {# JavaScript - Assuming BLACK icon #}
-                            <img src="{% static 'icons/js-icon.svg' %}" alt="JavaScript" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/js-icon.svg' %}); mask-image: url({% static 'icons/js-icon.svg' %});">
-                            <span class="skill-name">JavaScript</span>
-                        </div>
-                        <span class="proficiency-tag intermediate">Intermediate</span>
-                    </div>
-                    <div class="skill-card language-card">
-                        <div class="skill-card-header">
-                            {# HTML - Assuming COLORED icon #}
-                            <img src="{% static 'icons/html-icon.svg' %}" alt="HTML" class="skill-icon">
-                            <span class="skill-name">HTML</span>
-                        </div>
-                        <span class="proficiency-tag intermediate">Intermediate</span>
-                    </div>
-                    <div class="skill-card language-card">
-                        <div class="skill-card-header">
-                            {# CSS - Assuming COLORED icon #}
-                            <img src="{% static 'icons/css-icon.svg' %}" alt="CSS" class="skill-icon">
-                            <span class="skill-name">CSS</span>
-                        </div>
-                        <span class="proficiency-tag intermediate">Intermediate</span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="skills-category">
-                <h2>Frameworks & Libraries (SWE)</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        {# Django - Assuming BLACK icon #}
-                        <img src="{% static 'icons/django-icon.svg' %}" alt="Django" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/django-icon.svg' %}); mask-image: url({% static 'icons/django-icon.svg' %});">
-                        <span class="skill-name">Django</span>
-                        <span class="proficiency-tag intermediate">Intermediate</span>
-                    </div>
-                    <div class="skill-card">
-                        {# Flask - Assuming BLACK icon #}
-                        <img src="{% static 'icons/flask-icon.svg' %}" alt="Flask" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/flask-icon.svg' %}); mask-image: url({% static 'icons/flask-icon.svg' %});">
-                        <span class="skill-name">Flask</span>
-                        <span class="proficiency-tag intermediate">Intermediate</span>
-                    </div>
-                    <div class="skill-card">
-                        {# PyQt6 - Assuming BLACK icon #}
-                        <img src="{% static 'icons/pyqt6-icon.svg' %}" alt="PyQt6" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/pyqt6-icon.svg' %}); mask-image: url({% static 'icons/pyqt6-icon.svg' %});">
-                        <span class="skill-name">PyQt6 (GUI)</span>
-                        <span class="proficiency-tag intermediate">Intermediate</span>
-                    </div>
-                    <div class="skill-card">
-                        {# SQLAlchemy - Assuming BLACK icon (placeholder name) #}
-                        <img src="{% static 'icons/sqlalchemy-icon.svg' %}" alt="SQLAlchemy" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/sqlalchemy-icon.svg' %}); mask-image: url({% static 'icons/sqlalchemy-icon.svg' %});">
-                        <span class="skill-name">SQLAlchemy</span>
-                        <span class="proficiency-tag intermediate">Intermediate</span> {# ADDED #}
-                    </div>
-                </div>
-            </section>
-
-            <section class="skills-category">
-                <h2>DevOps & Servers (SWE)</h2>
-                <div class="skills-grid">
-                    <div class="skill-card"><img src="{% static 'icons/linux_icon.svg' %}" alt="Linux" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/linux_icon.svg' %}); mask-image: url({% static 'icons/linux_icon.svg' %});"> <span class="skill-name">Linux Ubuntu Server</span><span class="proficiency-tag intermediate">Intermediate</span></div>
-                    <div class="skill-card"><img src="{% static 'icons/nginx_icon.svg' %}" alt="Nginx" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/nginx_icon.svg' %}); mask-image: url({% static 'icons/nginx_icon.svg' %});"> <span class="skill-name">Nginx</span><span class="proficiency-tag intermediate">Intermediate</span></div>
-                    <div class="skill-card"><img src="{% static 'icons/gunicorn_icon.svg' %}" alt="Gunicorn" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/gunicorn_icon.svg' %}); mask-image: url({% static 'icons/gunicorn_icon.svg' %});"> <span class="skill-name">Gunicorn</span><span class="proficiency-tag intermediate">Intermediate</span></div>
-                    <div class="skill-card"><img src="{% static 'icons/cloudflare_icon.svg' %}" alt="Cloudflare" class="skill-icon"> <span class="skill-name">Cloudflare</span><span class="proficiency-tag intermediate">Intermediate</span></div>
-                    <div class="skill-card">
-                        {# CI/CD - Assuming BLACK icon (placeholder name) #}
-                        <img src="{% static 'icons/cicd-icon.svg' %}" alt="CI/CD" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/cicd-icon.svg' %}); mask-image: url({% static 'icons/cicd-icon.svg' %});">
-                        <span class="skill-name">CI/CD</span>
-                        <span class="proficiency-tag basic">Basic</span> {# ADDED #}
-                    </div>
-                    <div class="skill-card">
-                        {# GitHub Actions - Assuming BLACK icon (placeholder name) #}
-                        <img src="{% static 'icons/githubactions-icon.svg' %}" alt="GitHub Actions" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/githubactions-icon.svg' %}); mask-image: url({% static 'icons/githubactions-icon.svg' %});">
-                        <span class="skill-name">GitHub Actions</span>
-                        <span class="proficiency-tag basic">Basic</span> {# ADDED #}
-                    </div>
-                </div>
-            </section>
-
-            {# NEW CATEGORY FOR SWE #}
-            <section class="skills-category">
-                <h2>Testing & QA (SWE)</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        {# Unit Testing - Assuming BLACK icon (placeholder name) #}
-                        <img src="{% static 'icons/unittesting-icon.svg' %}" alt="Unit Testing" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/unittesting-icon.svg' %}); mask-image: url({% static 'icons/unittesting-icon.svg' %});">
-                        <span class="skill-name">Unit Testing</span>
-                        <span class="proficiency-tag basic">Basic</span> {# ADDED #}
-                    </div>
-                </div>
-            </section>
+                </section>
+                {% endfor %}
+            {% else %}
+                <p class="no-content-notice">Software Engineering skills will be listed here soon.</p>
+            {% endif %}
         </div>
 
+        {# Data Science & ML Skills - Rendered from Database #}
         <div class="skill-view-section" id="dsml-skills-view" hidden>
-            <section class="skills-category">
-                <h2>Languages (DS/ML)</h2>
-                <div class="skills-grid">
-                    <div class="skill-card language-card">
-                        <div class="skill-card-header">
-                            <img src="{% static 'icons/python-icon.svg' %}" alt="Python" class="skill-icon">
-                            <span class="skill-name">Python</span>
+            {% if dsml_skills_grouped %}
+                {% for sub_category, skills_in_sub in dsml_skills_grouped.items %}
+                <section class="skills-category">
+                    <h2>{{ sub_category }} (DS/ML)</h2>
+                    <div class="skills-grid">
+                        {% for skill in skills_in_sub %}
+                        <div class="skill-card {% if skill.associated_frameworks %}language-card{% endif %}">
+                            <div class="skill-card-header">
+                                {% if skill.icon_path %}
+                                <img src="{% static skill.icon_path %}" alt="{{ skill.name }} Icon"
+                                     class="skill-icon {% if skill.icon_recolor %}icon-recolor{% endif %}"
+                                     {% if skill.icon_recolor %}style="-webkit-mask-image: url({% static skill.icon_path %}); mask-image: url({% static skill.icon_path %});"{% endif %}>
+                                {% endif %}
+                                <span class="skill-name">{{ skill.name }}</span>
+                            </div>
+                            {% if skill.associated_frameworks %}
+                            <ul class="frameworks-list">
+                                {% for framework in skill.get_associated_frameworks_list %}  {# MODIFIED #}
+                                    <li>{{ framework }}</li> {# No need for |strip here as the method handles it #}
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <span class="proficiency-tag {{ skill.level }}">{{ skill.get_level_display }}</span>
                         </div>
-                        <ul class="frameworks-list">
-                            <li>Pandas</li>
-                            <li>Scipy</li>
-                            <li>Seaborn</li>
-                            <li>scikit-learn</li>
-                        </ul>
-                        <span class="proficiency-tag advanced">Advanced</span>
+                        {% endfor %}
                     </div>
-                     <div class="skill-card language-card">
-                        <div class="skill-card-header">
-                            <img src="{% static 'icons/sql-icon.svg' %}" alt="SQL" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/sql-icon.svg' %}); mask-image: url({% static 'icons/sql-icon.svg' %});">
-                            <span class="skill-name">SQL</span>
-                        </div>
-                        <ul class="frameworks-list">
-                            <li>PostgreSQL</li>
-                            <li>SQLAlchemy</li>
-                        </ul>
-                        <span class="proficiency-tag intermediate">Intermediate</span>
-                    </div>
-                    <div class="skill-card language-card">
-                        <div class="skill-card-header">
-                             <img src="{% static 'icons/cplusplus-icon.svg' %}" alt="C++" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/cplusplus-icon.svg' %}); mask-image: url({% static 'icons/cplusplus-icon.svg' %});">
-                            <span class="skill-name">C++ (for performance)</span>
-                        </div>
-                        <ul class="frameworks-list">
-                            <li>CUDA Kernel</li>
-                            <li>cuFFT</li>
-                        </ul>
-                        <span class="proficiency-tag intermediate">Intermediate</span>
-                    </div>
-                </div>
-            </section>
-
-            <section class="skills-category">
-                <h2>Libraries & Toolkits (DS/ML)</h2>
-                <div class="skills-grid">
-                    <div class="skill-card"><img src="{% static 'icons/pandas-icon.svg' %}" alt="Pandas" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/pandas-icon.svg' %}); mask-image: url({% static 'icons/pandas-icon.svg' %});"> <span class="skill-name">Pandas</span><span class="proficiency-tag advanced">Advanced</span></div>
-                    <div class="skill-card"><img src="{% static 'icons/numpy-icon.svg' %}" alt="NumPy" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/numpy-icon.svg' %}); mask-image: url({% static 'icons/numpy-icon.svg' %});"> <span class="skill-name">NumPy</span><span class="proficiency-tag advanced">Advanced</span></div>
-                    <div class="skill-card"><img src="{% static 'icons/scipy-icon.svg' %}" alt="SciPy" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/scipy-icon.svg' %}); mask-image: url({% static 'icons/scipy-icon.svg' %});"> <span class="skill-name">SciPy</span><span class="proficiency-tag intermediate">Intermediate</span></div>
-                    <div class="skill-card"><img src="{% static 'icons/matplotlib-icon.svg' %}" alt="Matplotlib" class="skill-icon"> <span class="skill-name">Matplotlib</span><span class="proficiency-tag intermediate">Intermediate</span></div>
-                    <div class="skill-card"><img src="{% static 'icons/seaborn-icon.svg' %}" alt="Seaborn" class="skill-icon"> <span class="skill-name">Seaborn</span><span class="proficiency-tag intermediate">Intermediate</span></div>
-                    <div class="skill-card"><img src="{% static 'icons/scikitlearn-icon.svg' %}" alt="Scikit-learn" class="skill-icon"> <span class="skill-name">Scikit-learn</span><span class="proficiency-tag advanced">Advanced</span></div>
-                    <div class="skill-card"><img src="{% static 'icons/cuda-icon.svg' %}" alt="CuPy" class="skill-icon"> <span class="skill-name">CuPy</span><span class="proficiency-tag basic">Basic</span></div>
-                    <div class="skill-card"><img src="{% static 'icons/cuda-icon.svg' %}" alt="cuFFT" class="skill-icon"> <span class="skill-name">cuFFT</span><span class="proficiency-tag basic">Basic</span></div>
-                    <div class="skill-card">
-                        {# CUDA Custom Kernels - Using existing CUDA icon #}
-                        <img src="{% static 'icons/cuda-icon.svg' %}" alt="CUDA Custom Kernels" class="skill-icon">
-                        <span class="skill-name">CUDA Custom Kernels</span>
-                        <span class="proficiency-tag basic">Basic</span> {# ADDED #}
-                    </div>
-                </div>
-            </section>
-
-             <section class="skills-category">
-                <h2>Concepts & Methodologies (DS/ML)</h2>
-                <div class="skills-grid">
-                    <div class="skill-card">
-                        <img src="{% static 'icons/ml-icon.svg' %}" alt="Machine Learning" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/ml-icon.svg' %}); mask-image: url({% static 'icons/ml-icon.svg' %});">
-                        <span class="skill-name">Machine Learning</span>
-                        <span class="proficiency-tag advanced">Advanced</span>
-                    </div>
-                    <div class="skill-card">
-                        <img src="{% static 'icons/dataviz_icon.svg' %}" alt="Data Visualization" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/dataviz_icon.svg' %}); mask-image: url({% static 'icons/dataviz_icon.svg' %});">
-                        <span class="skill-name">Data Visualization</span>
-                         <span class="proficiency-tag intermediate">Intermediate</span>
-                    </div>
-                     <div class="skill-card">
-                        <span class="skill-name">ETL Processes</span>
-                        <span class="proficiency-tag intermediate">Intermediate</span>
-                    </div>
-                    <div class="skill-card">
-                        <span class="skill-name">Data Pipeline Design</span>
-                        <span class="proficiency-tag intermediate">Intermediate</span>
-                    </div>
-                </div>
-            </section>
+                </section>
+                {% endfor %}
+            {% else %}
+                <p class="no-content-notice">Data Science & ML skills will be listed here soon.</p>
+            {% endif %}
         </div>
 
+        {# Common Skills - Rendered from Database #}
         <div class="skill-view-section" id="common-skills-view" hidden>
-            <section class="skills-category">
-                <h2>Databases (Common)</h2>
-                <div class="skills-grid">
-                    <div class="skill-card"><img src="{% static 'icons/sql-icon.svg' %}" alt="SQL" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/sql-icon.svg' %}); mask-image: url({% static 'icons/sql-icon.svg' %});"> <span class="skill-name">SQL</span><span class="proficiency-tag intermediate">Intermediate</span></div>
-                    <div class="skill-card"><img src="{% static 'icons/postgresql_icon.svg' %}" alt="PostgreSQL" class="skill-icon"> <span class="skill-name">PostgreSQL</span><span class="proficiency-tag intermediate">Intermediate</span></div>
-                </div>
-            </section>
+             {% if common_skills_grouped %}
+                {% for sub_category, skills_in_sub in common_skills_grouped.items %}
+                <section class="skills-category">
+                    <h2>{{ sub_category }} (Common)</h2>
+                    <div class="skills-grid">
+                        {% for skill in skills_in_sub %}
+                        <div class="skill-card {% if skill.associated_frameworks %}language-card{% endif %}">
+                            <div class="skill-card-header">
+                                {% if skill.icon_path %}
+                                <img src="{% static skill.icon_path %}" alt="{{ skill.name }} Icon"
+                                     class="skill-icon {% if skill.icon_recolor %}icon-recolor{% endif %}"
+                                     {% if skill.icon_recolor %}style="-webkit-mask-image: url({% static skill.icon_path %}); mask-image: url({% static skill.icon_path %});"{% endif %}>
+                                {% endif %}
+                                <span class="skill-name">{{ skill.name }}</span>
+                            </div>
+                            {% if skill.associated_frameworks %}
+                            <ul class="frameworks-list">
+                                {% for framework in skill.get_associated_frameworks_list %}  {# MODIFIED #}
+                                    <li>{{ framework }}</li> {# No need for |strip here as the method handles it #}
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <span class="proficiency-tag {{ skill.level }}">{{ skill.get_level_display }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endfor %}
+            {% else %}
+                 <p class="no-content-notice">Common skills will be listed here soon.</p>
+            {% endif %}
 
+            {# Professional & Research skills - Keep these hardcoded for now, or move to DB later #}
             <section class="skills-category">
-                <h2>Development Tools (Common)</h2>
-                <div class="skills-grid">
-                    <div class="skill-card"><img src="{% static 'icons/jupyter_icon.svg' %}" alt="JupyterLab" class="skill-icon"> <span class="skill-name">Jupyter Lab</span><span class="proficiency-tag advanced">Advanced</span></div>
-                    <div class="skill-card"><img src="{% static 'icons/github-icon.svg' %}" alt="Git" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/github-icon.svg' %}); mask-image: url({% static 'icons/github-icon.svg' %});"> <span class="skill-name">Git & GitHub</span><span class="proficiency-tag advanced">Advanced</span></div>
-                    <div class="skill-card"><img src="{% static 'icons/endnote_icon.svg' %}" alt="EndNote" class="skill-icon icon-recolor" style="-webkit-mask-image: url({% static 'icons/endnote_icon.svg' %}); mask-image: url({% static 'icons/endnote_icon.svg' %});"> <span class="skill-name">EndNote</span><span class="proficiency-tag intermediate">Intermediate</span></div>
-                </div>
-            </section>
-
-            <section class="skills-category">
-                <h2>Professional & Research Skills (Common)</h2>
+                <h2>Professional & Research Skills</h2>
                 <ul class="professional-skills-list">
                     <li>Technical Writing</li>
                     <li>Proposal Writing</li>
@@ -273,5 +143,7 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'js/skills.js' %}"></script>
+{# Link to your generic filter system and the skills page initializer #}
+<script src="{% static 'js/filterSystem.js' %}" defer></script>
+<script src="{% static 'js/skills_page_filter_init.js' %}" defer></script>
 {% endblock %}
