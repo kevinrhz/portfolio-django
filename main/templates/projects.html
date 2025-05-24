@@ -18,25 +18,24 @@
 <main class="projects-page">
     <header class="projects-header section-header">
         <h1>My Projects</h1>
-        <p class="subtitle">Filter by category or view all my work.</p>
+        <p class="subtitle">Showcasing a variety of my work. Filter by area of focus.</p>
         <div class="view-selector project-filters">
+            {# === MODIFIED FILTER BUTTONS === #}
             <button class="view-toggle-btn" data-filter="all">All Projects</button>
-            {% if project_categories %}
-                {% for category in project_categories %}
-                <button class="view-toggle-btn" data-filter="{{ category.slug }}">{{ category.name }}</button>
-                {% endfor %}
-            {% endif %}
-            {# You can add more static buttons here if needed, e.g., for "Research" if not in categories model #}
+            <button class="view-toggle-btn" data-filter="swe">Software Engineering</button>
+            <button class="view-toggle-btn" data-filter="dsml">Data Science & ML</button>
         </div>
     </header>
 
     <section class="projects-grid filterable-content">
         {% for project in projects %}
-        <div class="project-card filter-item" data-project-id="{{ project.title|slugify }}" data-category="{{ project.get_category_slugs_for_data_attr }}">
+        <div class="project-card filter-item" 
+             data-project-id="{{ project.title|slugify }}" 
+             data-category="{{ project.get_category_slugs_for_data_attr }}">
+            {# This data-category will now contain "swe", "dsml", or other slugs you've assigned #}
             {% if project.poster_image_path %}
             <img src="{% static project.poster_image_path %}" alt="{{ project.title }} Poster" class="project-image">
             {% else %}
-            {# Fallback if no poster image specified in admin #}
             <img src="{% static 'images/placeholder_project.webp' %}" alt="{{ project.title }} Placeholder" class="project-image">
             {% endif %}
             <div class="project-details">
@@ -45,13 +44,11 @@
                     {% if project.github_url %}<a target="_blank" rel="noopener noreferrer" href="{{ project.github_url }}" class="btn">GitHub</a>{% endif %}
                     {% if project.live_url %}<a target="_blank" rel="noopener noreferrer" href="{{ project.live_url }}" class="btn">Live Site</a>{% endif %}
                     {% if project.demo_url_name %}<a href="{% url project.demo_url_name %}" class="btn">Demo</a>{% endif %}
-                    <a href="#" class="btn btn-details">Details</a> {# This button triggers JS expansion #}
+                    <a href="#" class="btn btn-details">Details</a>
                 </div>
             </div>
             <div class="project-expanded-content">
                  <h2>{{ project.title }}</h2>
-                 {# You can add a subtitle field to your Project model if needed, e.g., project.subtitle #}
-                 {# For now, let's assume the main long_description covers this #}
                  {% if project.long_description %}
                  <p class="long-description">{{ project.long_description|linebreaksbr }}</p>
                  {% endif %}
@@ -62,13 +59,11 @@
                     {% endfor %}
                  </ul>
                  {% endif %}
-                 {# Add more links or content for expanded view if desired #}
             </div>
         </div>
         {% empty %}
         <p class="no-content-notice">No projects to display yet. Check back soon!</p>
         {% endfor %}
-        {# You could also loop through 'featured_projects' separately if you want them in a different section #}
     </section>
 </main>
 {% endblock %}

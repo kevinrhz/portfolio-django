@@ -11,50 +11,39 @@ function initializeFilterSystem(options) {
         return;
     }
 
-    // This function updates the active state of buttons and visibility of content sections
     function updateView(activeFilter) {
         filterButtons.forEach(btn => {
-            // Use data-filter for project page, data-view for skills page (or standardize to data-filter)
-            const filterKey = btn.dataset.filter || btn.dataset.view;
+            const filterKey = btn.dataset.filter; // Using data-filter consistently
             btn.classList.toggle('active', filterKey === activeFilter);
         });
 
-        // Logic specific to skills page: showing/hiding whole sections
-        if (options.sectionMap) {
+        if (options.sectionMap) { // For Skills page (section-based hiding)
             const sections = options.sectionMap;
             let commonShouldBeVisible = false;
 
-            // Determine if common section should be visible based on active filter
             if (activeFilter === 'all' || (options.showCommonWith && options.showCommonWith.includes(activeFilter))) {
                 commonShouldBeVisible = true;
             }
 
-            // Hide/show primary sections (SWE, DSML)
             const sweSection = document.getElementById(sections.swe);
             const dsmlSection = document.getElementById(sections.dsml);
 
-            if (sweSection) {
-                sweSection.hidden = !(activeFilter === 'all' || activeFilter === 'swe');
-            }
-            if (dsmlSection) {
-                dsmlSection.hidden = !(activeFilter === 'all' || activeFilter === 'dsml');
-            }
-
-            // Hide/show common section
+            if (sweSection) sweSection.hidden = !(activeFilter === 'all' || activeFilter === 'swe');
+            if (dsmlSection) dsmlSection.hidden = !(activeFilter === 'all' || activeFilter === 'dsml');
+            
             const commonSection = document.getElementById(options.commonSectionId);
-            if (commonSection) {
-                commonSection.hidden = !commonShouldBeVisible;
-            }
-        }
-        // If itemSelector and contentContainerSelector are provided (for project-like filtering)
-        else if (options.itemSelector && options.contentContainerSelector) {
+            if (commonSection) commonSection.hidden = !commonShouldBeVisible;
+
+        } else if (options.itemSelector && options.contentContainerSelector) { // For Projects page (item-based hiding)
             const contentItemsContainer = document.querySelector(options.contentContainerSelector);
-            if(contentItemsContainer){
+            if (contentItemsContainer) {
                 const contentItems = contentItemsContainer.querySelectorAll(options.itemSelector);
                 contentItems.forEach(item => {
-                    const itemCategories = item.dataset.category ? item.dataset.category.split(' ') : [];
+                    const itemCategoriesString = item.dataset.category || "";
+                    const itemCategories = itemCategoriesString.split(' ').filter(cat => cat.length > 0);
+                    
                     if (activeFilter === 'all' || itemCategories.includes(activeFilter)) {
-                        item.style.display = ''; // Default display (e.g., 'grid' for grid items)
+                        item.style.display = ''; // Or 'flex' if items are flex items
                     } else {
                         item.style.display = 'none';
                     }
@@ -65,20 +54,21 @@ function initializeFilterSystem(options) {
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            const filterKey = button.dataset.filter || button.dataset.view;
-            updateView(filterKey);
+            if (typeof closeCurrentlyExpandedProject === 'function') {
+                closeCurrentlyExpandedProject(); // Close expanded project card before filtering
+            }
+            updateView(button.dataset.filter);
         });
     });
 
-    // Initial view state
     if (options.defaultFilter) {
         updateView(options.defaultFilter);
     } else {
-        // Fallback if no default is specified, though skills_page_filter_init should set one
         const firstButton = filterButtonsContainer.querySelector(options.buttonSelector);
-        if(firstButton){
-            const firstFilterKey = firstButton.dataset.filter || firstButton.dataset.view;
-            updateView(firstFilterKey || 'all');
-        }
+        if (firstButton) updateView(firstButton.dataset.filter || 'all');
     }
 }
+
+// This function needs to be defined by the page that uses card expansion (projects page)
+// and made available if filterSystem is to call it.
+// function closeCurrentlyExpandedProject() { ... }
