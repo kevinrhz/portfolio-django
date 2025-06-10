@@ -10,8 +10,8 @@ environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
 
 SECRET_KEY = env("SECRET_KEY")
 
-DEBUG = True
-ALLOWED_HOSTS = ['kevinrahsaz.com', 'www.kevinrahsaz.com', '127.0.0.1', 'localhost']
+DEBUG = False
+ALLOWED_HOSTS = ['kevinrahsaz.com', 'www.kevinrahsaz.com', '192.168.50.200']
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 INSTALLED_APPS = [
