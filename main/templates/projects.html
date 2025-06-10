@@ -5,108 +5,65 @@
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/projects.css' %}">
+<link rel="stylesheet" href="{% static 'css/filter_buttons.css' %}"> {# Shared CSS for filter buttons #}
 {% endblock %}
 
 {% block extra_js %}
-<script src="{% static 'js/projects.js' %}"></script>
+<script src="{% static 'js/filterSystem.js' %}" defer></script>
+<script src="{% static 'js/projects_page_filter_init.js' %}" defer></script> {# Specific init for this page's filters #}
+<script src="{% static 'js/projects_card_expansion.js' %}" defer></script> {# Your card expansion logic #}
 {% endblock %}
 
 {% block content %}
 <main class="projects-page">
-    <h1 class="section-title">Projects</h1>
+    <header class="projects-header section-header">
+        <h1>My Projects</h1>
+        <p class="subtitle">Showcasing a variety of my work. Filter by area of focus.</p>
+        <div class="view-selector project-filters">
+            {# === MODIFIED FILTER BUTTONS === #}
+            <button class="view-toggle-btn" data-filter="all">All Projects</button>
+            <button class="view-toggle-btn" data-filter="swe">Software Engineering</button>
+            <button class="view-toggle-btn" data-filter="dsml">Data Science & ML</button>
+        </div>
+    </header>
 
-    <!-- Grid Layout for Projects -->
-    <section class="projects-grid">
-        <!-- CineSteam Project Card -->
-        <div class="project-card">
-            <img src="{% static 'images/CineSteamLogo.webp' %}" alt="CineSteamLogo">
+    <section class="projects-grid filterable-content">
+        {% for project in projects %}
+        <div class="project-card filter-item" 
+             data-project-id="{{ project.title|slugify }}" 
+             data-category="{{ project.get_category_slugs_for_data_attr }}">
+            {# This data-category will now contain "swe", "dsml", or other slugs you've assigned #}
+            {% if project.poster_image_path %}
+            <img src="{% static project.poster_image_path %}" alt="{{ project.title }} Poster" class="project-image">
+            {% else %}
+            <img src="{% static 'images/placeholder_project.webp' %}" alt="{{ project.title }} Placeholder" class="project-image">
+            {% endif %}
             <div class="project-details">
-                <h2>CineSteam</h2>
-                <p>A PostgreSQL relational database integrating IMDB's top 1000 Movies and Steam's 2025 game dataset for data analysis, SQL queries, and ETL with Python.</p>
-                <ul class="tech-stack">
-                    <li>Python</li>
-                    <li>PostgreSQL</li>
-                    <li>pandas</li>
-                    <li>psycopg2</li>
-                    <li>ETL</li>
-                </ul>
+                <p class="short-description">{{ project.short_description }}</p>
                 <div class="project-links">
-                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/kevinrhz/CineSteam" class="btn">GitHub</a>
-                    <a href="{% url 'cinesteam_demo' %}" class="btn">Demo</a>
+                    {% if project.github_url %}<a target="_blank" rel="noopener noreferrer" href="{{ project.github_url }}" class="btn">GitHub</a>{% endif %}
+                    {% if project.live_url %}<a target="_blank" rel="noopener noreferrer" href="{{ project.live_url }}" class="btn">Live Site</a>{% endif %}
+                    {% if project.demo_url_name %}<a href="{% url project.demo_url_name %}" class="btn">Demo</a>{% endif %}
+                    <a href="#" class="btn btn-details">Details</a>
                 </div>
             </div>
-        </div>
-
-        <!-- Custom Gaming PC Project Card -->
-        <div class="project-card">
-            <img src="{% static 'images/close up.jpeg' %}" alt="Custom PC Build">
-            <div class="project-details">
-                <h2>Custom PC Build</h2>
-                <p>An advanced liquid-cooled custom-built PC for peak gaming and productivity.</p>
-                <ul class="tech-stack">
-                    <li>Custom Cooling Loop</li>
-                    <li>Hardware Tuning</li>
-                    <li>Troubleshooting</li>
-                </ul>
-                <div class="project-links">
-                    <a href="#" class="btn">Gallery</a>
-                </div>
+            <div class="project-expanded-content">
+                 <h2>{{ project.title }}</h2>
+                 {% if project.long_description %}
+                 <p class="long-description">{{ project.long_description|linebreaksbr }}</p>
+                 {% endif %}
+                 {% if project.get_tech_stack_as_list %}
+                 <ul class="tech-stack">
+                    {% for tech in project.get_tech_stack_as_list %}
+                    <li>{{ tech }}</li>
+                    {% endfor %}
+                 </ul>
+                 {% endif %}
             </div>
         </div>
-
-        <!-- PyFileManager Project Card -->
-        <div class="project-card">
-            <img src="{% static 'images/PyFileManagerLogo.webp' %}" alt="PyFileManager">
-            <div class="project-details">
-                <h2>PyFileManager</h2>
-                <p>A file management system with GUI. Features file browsing, search, deletion and creation.</p>
-                <ul class="tech-stack">
-                    <li>Python</li>
-                    <li>PyQt6</li>
-                    <li>pathlib</li>
-                    <li>os</li>
-                </ul>
-                <div class="project-links">
-                    <a target="_blank" rel="noopener noreferrer" href="https://github.com/kevinrhz/PyFileManager" class="btn">GitHub</a>
-                    <a href="#" class="btn">Live Demo</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills & Technologies Section -->
-    <section class="skills-grid">
-        <h2>Skills & Technologies</h2>
-        <div class="skills-container">
-            <div class="skill-card">
-                <img src="{% static 'icons/python-black.svg' %}" alt="Python Icon">
-                <span>Python</span>
-            </div>
-            <div class="skill-card">
-                <img src="{% static 'icons/flask-icon.svg' %}" alt="Flask Icon">
-                <span>Flask</span>
-            </div>
-            <div class="skill-card">
-                <img src="{% static 'icons/sql-icon.svg' %}" alt="SQL Icon">
-                <span>SQL</span>
-            </div>
-            <div class="skill-card">
-                <img src="{% static 'icons/ml-icon.svg' %}" alt="Machine Learning Icon">
-                <span>Machine Learning</span>
-            </div>
-            <div class="skill-card">
-                <img src="{% static 'icons/css-icon.svg' %}" alt="CSS Icon">
-                <span>CSS</span>
-            </div>
-            <div class="skill-card">
-                <img src="{% static 'icons/html-icon.svg' %}" alt="HTML Icon">
-                <span>HTML</span>
-            </div>
-            <div class="skill-card">
-                <img src="{% static 'icons/js-icon.svg' %}" alt="JavaScript Icon">
-                <span>JavaScript</span>
-            </div>
-        </div>
+        {% empty %}
+        <p class="no-content-notice">No projects to display yet. Check back soon!</p>
+        {% endfor %}
     </section>
 </main>
 {% endblock %}

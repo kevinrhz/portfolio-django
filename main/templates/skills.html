@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}My Skills{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/skills.css' %}">
+<link rel="stylesheet" href="{% static 'css/filter_buttons.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="skills-page">
+    <header class="skills-header section-header"> {# Consistent header styling #}
+        <h1>Skills & Expertise</h1>
+        <p class="subtitle">Explore my skills tailored to your interest, or view all.</p>
+        <div class="view-selector skills-filters"> {# Ensure this class matches JS selector if using generic filter system #}
+            <button class="view-toggle-btn" data-filter="all" data-view="all">View All Skills</button> {# data-view for original JS, data-filter for new #}
+            <button class="view-toggle-btn" data-filter="swe" data-view="swe">Software Engineering</button>
+            <button class="view-toggle-btn" data-filter="dsml" data-view="dsml">Data Science & ML</button>
+        </div>
+    </header>
+
+    <div class="skills-content-container filterable-content">
+        {# Software Engineering Skills - Rendered from Database #}
+        <div class="skill-view-section" id="swe-skills-view">
+            {% if swe_skills_grouped %}
+                {% for sub_category, skills_in_sub in swe_skills_grouped.items %}
+                <section class="skills-category">
+                    <h2>{{ sub_category }} (SWE)</h2>
+                    <div class="skills-grid">
+                        {% for skill in skills_in_sub %}
+                        <div class="skill-card {% if skill.associated_frameworks %}language-card{% endif %}">
+                            <div class="skill-card-header">
+                                {% if skill.icon_path %}
+                                <img src="{% static skill.icon_path %}" alt="{{ skill.name }} Icon"
+                                     class="skill-icon {% if skill.icon_recolor %}icon-recolor{% endif %}"
+                                     {% if skill.icon_recolor %}style="-webkit-mask-image: url({% static skill.icon_path %}); mask-image: url({% static skill.icon_path %});"{% endif %}>
+                                {% endif %}
+                                <span class="skill-name">{{ skill.name }}</span>
+                            </div>
+                            {% if skill.associated_frameworks %}
+                            <ul class="frameworks-list">
+                                {% for framework in skill.get_associated_frameworks_list %}  {# MODIFIED #}
+                                    <li>{{ framework }}</li> {# No need for |strip here as the method handles it #}
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <span class="proficiency-tag {{ skill.level }}">{{ skill.get_level_display }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endfor %}
+            {% else %}
+                <p class="no-content-notice">Software Engineering skills will be listed here soon.</p>
+            {% endif %}
+        </div>
+
+        {# Data Science & ML Skills - Rendered from Database #}
+        <div class="skill-view-section" id="dsml-skills-view" hidden>
+            {% if dsml_skills_grouped %}
+                {% for sub_category, skills_in_sub in dsml_skills_grouped.items %}
+                <section class="skills-category">
+                    <h2>{{ sub_category }} (DS/ML)</h2>
+                    <div class="skills-grid">
+                        {% for skill in skills_in_sub %}
+                        <div class="skill-card {% if skill.associated_frameworks %}language-card{% endif %}">
+                            <div class="skill-card-header">
+                                {% if skill.icon_path %}
+                                <img src="{% static skill.icon_path %}" alt="{{ skill.name }} Icon"
+                                     class="skill-icon {% if skill.icon_recolor %}icon-recolor{% endif %}"
+                                     {% if skill.icon_recolor %}style="-webkit-mask-image: url({% static skill.icon_path %}); mask-image: url({% static skill.icon_path %});"{% endif %}>
+                                {% endif %}
+                                <span class="skill-name">{{ skill.name }}</span>
+                            </div>
+                            {% if skill.associated_frameworks %}
+                            <ul class="frameworks-list">
+                                {% for framework in skill.get_associated_frameworks_list %}  {# MODIFIED #}
+                                    <li>{{ framework }}</li> {# No need for |strip here as the method handles it #}
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <span class="proficiency-tag {{ skill.level }}">{{ skill.get_level_display }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endfor %}
+            {% else %}
+                <p class="no-content-notice">Data Science & ML skills will be listed here soon.</p>
+            {% endif %}
+        </div>
+
+        {# Common Skills - Rendered from Database #}
+        <div class="skill-view-section" id="common-skills-view" hidden>
+             {% if common_skills_grouped %}
+                {% for sub_category, skills_in_sub in common_skills_grouped.items %}
+                <section class="skills-category">
+                    <h2>{{ sub_category }} (Common)</h2>
+                    <div class="skills-grid">
+                        {% for skill in skills_in_sub %}
+                        <div class="skill-card {% if skill.associated_frameworks %}language-card{% endif %}">
+                            <div class="skill-card-header">
+                                {% if skill.icon_path %}
+                                <img src="{% static skill.icon_path %}" alt="{{ skill.name }} Icon"
+                                     class="skill-icon {% if skill.icon_recolor %}icon-recolor{% endif %}"
+                                     {% if skill.icon_recolor %}style="-webkit-mask-image: url({% static skill.icon_path %}); mask-image: url({% static skill.icon_path %});"{% endif %}>
+                                {% endif %}
+                                <span class="skill-name">{{ skill.name }}</span>
+                            </div>
+                            {% if skill.associated_frameworks %}
+                            <ul class="frameworks-list">
+                                {% for framework in skill.get_associated_frameworks_list %}  {# MODIFIED #}
+                                    <li>{{ framework }}</li> {# No need for |strip here as the method handles it #}
+                                {% endfor %}
+                            </ul>
+                            {% endif %}
+                            <span class="proficiency-tag {{ skill.level }}">{{ skill.get_level_display }}</span>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endfor %}
+            {% else %}
+                 <p class="no-content-notice">Common skills will be listed here soon.</p>
+            {% endif %}
+
+            {# Professional & Research skills - Keep these hardcoded for now, or move to DB later #}
+            <section class="skills-category">
+                <h2>Professional & Research Skills</h2>
+                <ul class="professional-skills-list">
+                    <li>Technical Writing</li>
+                    <li>Proposal Writing</li>
+                    <li>Data Analysis & Interpretation</li>
+                    <li>Problem Solving & Critical Thinking</li>
+                    <li>Communication & Collaboration</li>
+                    <li>Research Lab Methodologies</li>
+                </ul>
+            </section>
+        </div>
+    </div>
+</main>
+{% endblock %}
+
+{% block extra_js %}
+{# Link to your generic filter system and the skills page initializer #}
+<script src="{% static 'js/filterSystem.js' %}" defer></script>
+<script src="{% static 'js/skills_page_filter_init.js' %}" defer></script>
+{% endblock %}

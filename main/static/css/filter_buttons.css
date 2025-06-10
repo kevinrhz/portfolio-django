@@ -1,0 +1,87 @@
+.view-selector { /* Used as a common class for button containers */
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.view-toggle-btn {
+    padding: 10px 24px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    /* Default inactive state: you can set a neutral one here if preferred */
+    background: var(--neutral-dark, #3a3a3e); /* Example neutral dark */
+    color: var(--neutral-light, #cccccc);
+}
+
+.view-toggle-btn:hover:not(.active) {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px rgba(0,0,0,0.2);
+    background: var(--neutral-medium, #4f4f53); /* Slightly lighter on hover */
+}
+
+.view-toggle-btn.active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2), inset 0 1px 3px rgba(0,0,0,0.25);
+    color: #fff; /* Default active text color, specific buttons can override */
+}
+
+/* --- "All" Button Theme (Orange/Red - for data-filter="all") --- */
+.view-toggle-btn[data-filter="all"] {
+    background: linear-gradient(145deg, var(--accent-primary), var(--accent-secondary));
+    color: var(--text-color); /* Ensure this is white as per your theme */
+}
+.view-toggle-btn[data-filter="all"]:hover:not(.active) {
+    background: linear-gradient(145deg, var(--accent-primary), var(--accent-secondary));
+    box-shadow: 0 6px 15px rgba(var(--accent-primary-rgb, 255, 69, 0), 0.4);
+    transform: translateY(-2px);
+}
+.view-toggle-btn[data-filter="all"].active {
+    background: var(--accent-secondary);
+    color: #fff;
+}
+.view-toggle-btn[data-filter="all"].active:hover {
+    background: var(--accent-primary);
+}
+
+/* --- Software Engineering Button Theme (Yellow/Gold - for data-filter="swe") --- */
+/* Inactive state uses general .view-toggle-btn style or can be specific if needed */
+.view-toggle-btn[data-filter="swe"]:hover:not(.active) {
+    background: linear-gradient(145deg, #FDE047, #FACC15);
+    box-shadow: 0 6px 15px rgba(250, 204, 21, 0.35);
+    color: #1E293B; /* Dark text for yellow */
+}
+.view-toggle-btn[data-filter="swe"].active {
+    background: #EAB308; /* Solid gold */
+    color: #1E293B; /* Dark text for yellow */
+}
+.view-toggle-btn[data-filter="swe"].active:hover {
+    background: #CA8A04; /* Darker gold */
+}
+
+/* --- Data Science & ML Button Theme (Blue - for data-filter="dsml") --- */
+/* Inactive state uses general .view-toggle-btn style or can be specific if needed */
+.view-toggle-btn[data-filter="dsml"]:hover:not(.active) {
+    background: linear-gradient(145deg, #60A5FA, #3B82F6);
+    box-shadow: 0 6px 15px rgba(59, 130, 246, 0.35);
+    color: #fff;
+}
+.view-toggle-btn[data-filter="dsml"].active {
+    background: #2563EB; /* Solid blue */
+    color: #fff;
+}
+.view-toggle-btn[data-filter="dsml"].active:hover {
+    background: #1D4ED8; /* Darker blue */
+}
+
+/* Specific overrides for skills page if its data-view attributes are different */
+/* e.g., .skills-filters .view-toggle-btn[data-view="all"] if skills page uses data-view */
+/* For consistency, it's best if both pages use data-filter */

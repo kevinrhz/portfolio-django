@@ -1,9 +1,25 @@
 :root {
-  --bg-color: #1E1E1E;
-  --text-color: #FFFFFF;
-  --accent-primary: #FF4500;
-  --accent-secondary: #D32F2F;
-  --neutral-light: #B0B0B0;
+    /* Glow Colors */
+    --accent-primary-glow: rgba(255, 69, 0, 0.6); /* OrangeRed for primary glow - medium strength */
+    --accent-primary-glow-strong: rgba(255, 69, 0, 0.8); /* Stronger orange glow */
+    --secondary-glow: rgba(255, 255, 255, 0.3); /* Soft White/light glow for "About Me" prompt */
+    --secondary-glow-strong: rgba(255, 255, 255, 0.5); /* Stronger white glow */
+
+    /* Element Sizes & Offsets */
+    --border-corner-size: 25px;
+    --border-offset: -15px;
+    --projects-button-glow-width: 340px; /* Width for the inner plaque glow, adjust based on button */
+
+
+    /* Main Colors */
+    --bg-color: #1E1E1E;
+    --bg-color-hero: #0A0A0A; /* Darker background for Hero (landing page) */
+    --bg-color-about-section: #1F1F1F; /* Brighter background for About Me section */
+    --text-color: #FFFFFF;
+    --accent-primary: #FF4500; /* OrangeRed */
+    --accent-secondary: #D32F2F; /* Darker Red */
+    --neutral-light: #B0B0B0;
+    --plaque-bg: rgba(35, 35, 40, 0.9);
 }
 
 body {

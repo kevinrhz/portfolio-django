@@ -1,0 +1,355 @@
+.skills-page {
+    max-width: 1200px; /* Adjusted for potentially smaller cards */
+    margin: 40px auto;
+    padding: 20px;
+    color: var(--text-color);
+    background-color: transparent;
+}
+
+.skills-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.skills-header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    color: var(--neutral-light);
+}
+
+.skills-header .subtitle {
+    font-size: 1.2rem;
+    color: var(--neutral-light);
+    max-width: 700px;
+    margin: 0 auto 30px auto;
+}
+
+.skills-view-selector {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 50px;
+    flex-wrap: wrap;
+}
+
+.view-toggle-btn {
+    padding: 12px 28px;
+    font-size: 1rem;
+    font-weight: bold;
+    /* Default state for all buttons (inactive, primarily for "All Skills") */
+    color: var(--text-color); /* Default white text */
+    background: linear-gradient(145deg, var(--accent-primary), var(--accent-secondary)); /* Default orange-red gradient */
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.view-toggle-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(var(--accent-primary-rgb, 255, 69, 0), 0.4);
+}
+
+.view-toggle-btn.active {
+    background: var(--accent-secondary);
+    box-shadow: 0 2px 8px rgba(var(--accent-primary-rgb, 255, 69, 0), 0.5),
+                inset 0 2px 4px rgba(0,0,0,0.3);
+    transform: translateY(1px);
+    color: #fff;
+}
+
+/* --- "All Skills" Button States (Orange/Red Theme) --- */
+.view-toggle-btn[data-view="all"]:hover:not(.active) {
+    transform: translateY(-2px);
+    /* Stays the default orange-red gradient on hover */
+    box-shadow: 0 6px 15px rgba(var(--accent-primary-rgb, 255, 69, 0), 0.4);
+}
+
+.view-toggle-btn[data-view="all"].active {
+    background: var(--accent-secondary); /* Darker red for active */
+    box-shadow: 0 2px 8px rgba(var(--accent-primary-rgb, 255, 69, 0), 0.5),
+                inset 0 2px 4px rgba(0,0,0,0.3);
+    transform: translateY(1px);
+    color: #fff; /* Ensure white text */
+}
+
+.view-toggle-btn[data-view="all"].active:hover {
+    background: var(--accent-primary); /* Lighter red on hover when active */
+    box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb, 255, 69, 0), 0.6),
+                inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* --- Data Science & ML Button States (Blue Theme) --- */
+.view-toggle-btn[data-view="dsml"] {
+    /* Inherits default orange/red when inactive and not hovered */
+}
+
+.view-toggle-btn[data-view="dsml"]:hover:not(.active) {
+    background: linear-gradient(145deg, #60A5FA, #3B82F6); /* Light blue to medium blue gradient */
+    box-shadow: 0 6px 15px rgba(59, 130, 246, 0.35); /* Blue glow */
+    color: #fff; /* Ensure white text */
+    transform: translateY(-2px);
+}
+
+.view-toggle-btn[data-view="dsml"].active {
+    background: #2563EB; /* A solid, rich blue (Tailwind Blue 600) */
+    box-shadow: 0 2px 8px rgba(59, 130, 246, 0.5), /* Blue glow */
+                inset 0 2px 4px rgba(0,0,0,0.3);
+    transform: translateY(1px);
+    color: #fff; /* Ensure white text */
+}
+
+.view-toggle-btn[data-view="dsml"].active:hover {
+    background: #1D4ED8; /* Darker blue for hover when active (Tailwind Blue 700) */
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.6),
+                inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* --- Software Engineering Button States (Yellow/Gold Theme) --- */
+.view-toggle-btn[data-view="swe"] {
+    /* Inherits default orange/red when inactive and not hovered */
+    /* Text color will be white by default, changes on hover/active */
+}
+
+.view-toggle-btn[data-view="swe"]:hover:not(.active) {
+    background: linear-gradient(145deg, #FDE047, #FACC15); /* Light yellow to gold gradient */
+    box-shadow: 0 6px 15px rgba(250, 204, 21, 0.35); /* Yellow glow */
+    color: #1E293B; /* Dark text for yellow */
+    transform: translateY(-2px);
+}
+
+.view-toggle-btn[data-view="swe"].active {
+    background: #EAB308; /* A solid, rich gold (Tailwind Yellow 500) */
+    box-shadow: 0 2px 8px rgba(250, 204, 21, 0.5), /* Yellow glow */
+                inset 0 2px 4px rgba(0,0,0,0.3);
+    transform: translateY(1px);
+    color: #1E293B; /* Dark text for yellow */
+}
+
+.view-toggle-btn[data-view="swe"].active:hover {
+    background: #CA8A04; /* Darker gold for hover when active (Tailwind Yellow 600) */
+    box-shadow: 0 4px 12px rgba(250, 204, 21, 0.6),
+                inset 0 2px 4px rgba(0,0,0,0.3);
+    color: #1E293B; /* Dark text for yellow */
+}
+
+.skill-view-section[hidden] {
+    display: none;
+}
+
+.skills-category {
+    margin-bottom: 50px;
+}
+
+.skills-category h2 {
+    font-size: 1.8rem;
+    color: var(--accent-secondary);
+    border-bottom: 2px solid var(--accent-primary);
+    padding-bottom: 8px;
+    margin-bottom: 30px;
+}
+
+.skills-grid, .languages-grid {
+    display: grid;
+    /* Adjust minmax for smaller card size. */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.skill-card {
+    background-color: rgba(45, 45, 55, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px; /* Slightly smaller radius for smaller cards */
+    padding: 20px; /* Reduced padding for smaller cards */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out, border-color 0.2s ease-out;
+    min-height: 180px; /* Adjusted base height for smaller cards */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* Adjusted shadow */
+}
+
+.skill-card:hover {
+    transform: translateY(-6px) scale(1.02); /* Adjusted hover effect */
+    border-color: var(--accent-primary);
+    box-shadow: 0 10px 25px rgba(var(--accent-primary-rgb, 255, 69, 0), 0.25);
+}
+
+.skill-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 12px; /* Adjusted space */
+    width: 100%;
+    justify-content: center;
+}
+
+.skill-icon {
+    width: 72px;  /* Doubled from 36px */
+    height: 72px; /* Doubled from 36px */
+    margin-right: 15px;
+    object-fit: contain;
+}
+
+.skill-card .skill-name {
+    font-size: 1.5rem; /* Increased font size from 1.3rem */
+    font-weight: bold;
+    color: var(--neutral-light);
+    margin-bottom: 8px;
+}
+
+.language-card .skill-name {
+    margin-bottom: 5px;
+}
+
+.frameworks-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 8px;
+    margin-bottom: 12px;
+    font-size: 0.85rem; /* Adjusted font size */
+    color: var(--text-color);
+    width: 100%;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+}
+
+.frameworks-list li {
+    background-color: rgba(var(--accent-secondary-rgb, 211, 47, 47), 0.3);
+    padding: 4px 10px; /* Adjusted padding */
+    border-radius: 12px;
+    opacity: 0.9;
+    font-weight: 500;
+    border: 1px solid rgba(var(--accent-secondary-rgb, 211, 47, 47), 0.5);
+}
+
+.proficiency-tag {
+    font-size: 0.8rem; /* Adjusted size for potentially smaller cards */
+    padding: 6px 14px; /* Adjusted padding */
+    border-radius: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-top: auto;
+    align-self: center;
+    white-space: nowrap;
+    color: white; /* Default text color for tags */
+    border: 1px solid transparent;
+}
+
+/* Skill Level Colors - Orange to Red */
+.proficiency-tag.basic {
+    background-color: #FFA500; /* Orange */
+    border-color: #EE9A00;     /* Slightly darker, less saturated orange for border */
+    color: #000000; /* Black text for better contrast on lighter orange */
+}
+.proficiency-tag.intermediate {
+    background-color: #FF7F00; /* Vibrant Orange - more orange */
+    border-color: #E67300;     /* Darker vibrant orange for border */
+    color: #FFFFFF; /* White text */
+}
+.proficiency-tag.advanced {
+    background-color: #FF5733; /* Slightly more reddish orange than Tomato - very slightly more red */
+    border-color: #E64A2E;     /* Darker reddish orange for border */
+    color: #FFFFFF; /* White text */
+}
+.proficiency-tag.expert {
+    background-color: #F03A17; /* A strong, fiery red-orange - more red */
+    border-color: #D93114;     /* Darker fiery red-orange for border */
+    color: #FFFFFF; /* White text */
+}
+
+/* Keep other specific tag styles if needed, or remove if replaced by level colors */
+/* Example: if you still want to differentiate DS/ML languages by a base color before the level */
+.proficiency-tag.dsml-lang.basic { background-color: #FFA500; /* ... */ }
+
+
+.professional-skills-list {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); /* Adjusted for potentially smaller cards */
+    gap: 12px;
+}
+
+.professional-skills-list li {
+    background-color: rgba(255, 255, 255, 0.04);
+    padding: 16px 18px; /* Adjusted padding */
+    border-radius: 8px;
+    font-size: 0.95rem; /* Adjusted font size */
+    border-left: 4px solid var(--accent-secondary);
+    transition: background-color 0.2s ease, border-left-color 0.2s ease;
+}
+.professional-skills-list li:hover {
+    background-color: rgba(var(--accent-primary-rgb, 255, 69, 0), 0.15);
+    border-left-color: var(--accent-primary);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .skills-grid, .languages-grid {
+        grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); /* Adjust for tablets */
+    }
+    .skill-icon { width: 60px; height: 60px; }
+    .skill-card .skill-name { font-size: 1.35rem; }
+}
+
+@media (max-width: 768px) {
+    .skills-page { max-width: 100%; padding: 20px 15px; }
+    .skills-header h1 { font-size: 2.2rem; }
+    .skills-category h2 { font-size: 1.6rem; }
+    .skills-grid, .languages-grid {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); /* Further adjust */
+        gap: 20px; /* Gap for smaller tablets */
+    }
+    .view-toggle-btn { font-size: 0.9rem; padding: 10px 20px; }
+    .skill-card { padding: 15px; min-height: 170px; }
+    .skill-icon { width: 56px; height: 56px; }
+    .skill-card .skill-name { font-size: 1.25rem; }
+    .frameworks-list li { padding: 3px 8px; font-size: 0.75rem;}
+}
+
+@media (max-width: 480px) {
+    .skills-grid, .languages-grid {
+        grid-template-columns: repeat(2, 1fr); /* MODIFIED: 2 columns */
+        gap: 15px; /* MODIFIED: Slightly reduced gap for 2 columns on small screens */
+    }
+    .professional-skills-list {
+        grid-template-columns: 1fr; /* This can remain 1 column if preferred */
+    }
+    .view-toggle-btn {
+        width: calc(50% - 10px); /* Adjust if needed due to parent padding/margins */
+        margin-bottom: 10px;
+        font-size: 0.85rem;
+        padding: 10px 15px;
+    }
+    .view-toggle-btn[data-view="all"] {
+        width: 100%;
+    }
+    .skill-card {
+        min-height: auto; /* Keep this */
+        padding: 12px; /* Slightly adjust padding if needed for card content */
+    }
+    .skill-icon {
+        width: 40px; /* Slightly reduce icon size if cards become too narrow */
+        height: 40px;
+        margin-right: 8px;
+    }
+    .skill-card .skill-name {
+        font-size: 1.05rem; /* Adjust skill name font size if needed */
+    }
+    .proficiency-tag {
+        font-size: 0.7rem; /* Adjust proficiency tag font size */
+        padding: 4px 10px;
+    }
+    .frameworks-list li {
+        padding: 2px 6px;
+        font-size: 0.7rem;
+    }
+}

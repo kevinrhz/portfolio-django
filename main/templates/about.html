@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}More About Me{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/about.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="about-page">
+    <section class="about-intro">
+        <h1>More About Me</h1>
+        <p class="intro-summary">
+        I am a highly motivated Software Engineer and Data Scientist with a passion for building innovative solutions and extracting actionable insights from data. With a strong foundation in developing scalable web applications using Python and Django, and applying machine learning techniques to solve complex business problems, my goal is to leverage my skills to contribute to a dynamic team and create impactful technology.
+        </p>
+    </section>
+
+    <section class="about-background">
+        <h2>Background & Journey</h2>
+        <p>
+            I am currently pursuing a Bachelor of Science in Computer Science from the University of Phoenix, expecting to graduate in April 2026. My academic journey has been paralleled by continuous self-learning and practical application, particularly in the realm of data science and machine learning. I am driven by a desire to not just understand theoretical concepts but to apply them in creating tangible, efficient solutions. [cite_start] My experience includes managing high-volume shifts and optimizing service times at Tanoor Fayyed LLC, where I honed skills in communication, problem-solving, and versatility by working in multiple roles. [cite: 2, 3, 4, 5]
+        </p>
+        <div class="achievements">
+            <h3>Key Achievements & Projects</h3>
+            <ul>
+                <li>
+                    Spearheaded the development of a Django-based e-commerce platform prototype, conceptualizing features aimed at increasing online sales by an estimated 20% in the first quarter post-launch.
+                </li>
+                <li>
+                    Designed and built a machine learning model to predict customer churn with a target accuracy of 90%, aiming to reduce customer attrition by 15%.
+                </li>
+                <li>
+                    Led a small team of 3 peer engineers in a project to successfully design and simulate the deployment of a RESTful API for a high-traffic application concept.
+                </li>
+                <li>
+                    **PyFileManager:** Developed a file management system with a GUI using Python, PyQt6, Pathlib, and OS modules, showcasing skills in GUI application development and system interaction.
+                </li>
+                <li>
+                    **CineSteam:** Engineered a PostgreSQL relational database integrating IMDB's top movies and Steam's game dataset. This project involved ETL processes using Python and Pandas, data pipeline creation, and developing a recommendation algorithm.
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="about-skills-summary">
+        <h2>Skills & Expertise</h2>
+        <p>
+            My core competencies include Python (Intermediate), SQL (Intermediate), HTML/CSS (Intermediate), with foundational knowledge in Java and JavaScript. I am proficient in the full software development lifecycle, from conceptualization and design to deployment and maintenance, and experienced in applying data science methodologies to drive business decisions. [cite_start] I excel in problem-solving, communication, and mathematical reasoning. [cite: 4]
+        </p>
+        <a href="{% url 'skills' %}" class="view-all-skills">View All Skills in Detail</a>
+    </section>
+
+    <section class="about-projects-highlight">
+        <h2>Highlighted Projects</h2>
+        <div class="highlight-grid">
+            <div class="highlight-card">
+                <h3>CineSteam</h3>
+                <p>
+                    A PostgreSQL database project integrating movie and game datasets to analyze trends and provide recommendations. Key technologies: Python, PostgreSQL, pandas, ETL. <a href="{% url 'projects' %}#cinesteam">Learn More</a> {# Assumes you might add an ID to project cards later #}
+                </p>
+            </div>
+            <div class="highlight-card">
+                <h3>PyFileManager</h3>
+                <p>
+                    A GUI-based file management system for efficient file operations. Key technologies: Python, PyQt6. <a href="{% url 'projects' %}#pyfilemanager">Learn More</a>
+                </p>
+            </div>
+             <div class="highlight-card">
+                <h3>Portfolio Website (This Site!)</h3>
+                <p>
+                    This portfolio, initially built with Flask and now being reconstructed with Django, showcases my journey in full-stack development. Key technologies: Python, Django, HTML, CSS, JavaScript.
+                </p>
+            </div>
+        </div>
+        <a href="{% url 'projects' %}" class="view-all-projects">View All Projects</a>
+    </section>
+
+    <section class="about-personal-interests">
+        <h2>Personal Interests</h2>
+        <p>
+            Outside of academic and professional pursuits, I am deeply passionate about technology, constantly exploring new advancements and tools. I also enjoy creative outlets such as playing the guitar, which helps me think differently and approach problems from new perspectives. Hiking in the beautiful Pacific Northwest is another activity I cherish, offering a chance to recharge and find inspiration in nature.
+        </p>
+    </section>
+
+    <section class="about-cta">
+        <h2>Let's Connect!</h2>
+        <p>
+            I am actively seeking new opportunities to apply my skills and contribute to challenging projects where I can grow and make a meaningful impact. Please feel free to reach out to discuss potential collaborations, data science roles, or software engineering opportunities.
+        </p>
+        <div class="cta-buttons">
+            <a href="{% url 'contact' %}" class="cta-button">Contact Me</a>
+            <a href="{% static 'Kevin Rahsaz Resume update 2025.pdf' %}" class="cta-button" target="_blank">View Resume</a>
+            <a href="{% url 'home' %}" class="cta-button cta-button-secondary">Back to Home</a>
+        </div>
+    </section>
+</main>
+{% endblock %}
